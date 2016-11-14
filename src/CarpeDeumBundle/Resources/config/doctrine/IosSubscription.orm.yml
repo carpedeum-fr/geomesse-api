@@ -1,0 +1,37 @@
+CarpeDeumBundle\Entity\IosSubscription:
+    type: entity
+    table: IOS_SUBSCRIPTIONS
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            column: ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        accountId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: ACCOUNT_ID
+        receipt:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: RECEIPT
+        expires:
+            type: datetime
+            nullable: false
+            column: EXPIRES
+        date:
+            type: datetime
+            nullable: false
+            column: DATE
+    lifecycleCallbacks: {  }

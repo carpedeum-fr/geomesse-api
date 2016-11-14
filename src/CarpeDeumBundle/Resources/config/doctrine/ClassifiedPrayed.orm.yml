@@ -1,0 +1,36 @@
+CarpeDeumBundle\Entity\ClassifiedPrayed:
+    type: entity
+    table: CLASSIFIEDPRAYED
+    indexes:
+        CLASSIFIED_ID:
+            columns:
+                - CLASSIFIED_ID
+    id: {  }
+    fields:
+        classifiedId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: CLASSIFIED_ID
+        accountId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: ACCOUNT_ID
+        day:
+            type: date
+            nullable: false
+            options:
+                default: '0000-00-00'
+            column: DAY
+        date:
+            type: datetime
+            nullable: false
+            options:
+                default: '0000-00-00 00:00:00'
+            column: DATE
+    lifecycleCallbacks: {  }

@@ -1,0 +1,588 @@
+CarpeDeumBundle\Entity\Account:
+    type: entity
+    table: ACCOUNTS
+    indexes:
+        GEO:
+            columns:
+                - GEO_LAT
+                - GEO_LNG
+    uniqueConstraints:
+        LOGIN:
+            columns:
+                - LOGIN
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            column: ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        login:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+            column: LOGIN
+        password:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+            column: PASSWORD
+        emailConfirmed:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: EMAIL_CONFIRMED
+        admin:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: ADMIN
+        type:
+            type: string
+            nullable: false
+            length: null
+            options:
+                fixed: false
+                default: USER
+            column: TYPE
+        dateSignup:
+            type: datetime
+            nullable: false
+            options:
+                default: '0000-00-00 00:00:00'
+            column: DATE_SIGNUP
+        dateLogin:
+            type: datetime
+            nullable: false
+            options:
+                default: '0000-00-00 00:00:00'
+            column: DATE_LOGIN
+        datePremium:
+            type: date
+            nullable: false
+            options:
+                default: '0000-00-00'
+            column: DATE_PREMIUM
+        dateOnline:
+            type: datetime
+            nullable: false
+            options:
+                default: '0000-00-00 00:00:00'
+            column: DATE_ONLINE
+        dateAway:
+            type: datetime
+            nullable: false
+            column: DATE_AWAY
+        dateBirth:
+            type: date
+            nullable: false
+            options:
+                default: '0000-00-00'
+            column: DATE_BIRTH
+        sessionId:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+            column: SESSION_ID
+        sessionIdMob:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+            column: SESSION_ID_MOB
+        sessionIdApi:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+            column: SESSION_ID_API
+        latestIpAddress:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+            column: LATEST_IP_ADDRESS
+        latestIpDate:
+            type: datetime
+            nullable: false
+            options:
+                default: '0000-00-00 00:00:00'
+            column: LATEST_IP_DATE
+        latestUseragent:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: LATEST_USERAGENT
+        latestLang:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+            column: LATEST_LANG
+        latestSecure:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: LATEST_SECURE
+        disabled:
+            type: boolean
+            nullable: false
+            column: DISABLED
+        adminSuspended:
+            type: datetime
+            nullable: false
+            options:
+                default: '0000-00-00 00:00:00'
+            column: ADMIN_SUSPENDED
+        adminSuspendedReason:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: ADMIN_SUSPENDED_REASON
+        adminNoupload:
+            type: datetime
+            nullable: false
+            column: ADMIN_NOUPLOAD
+        adminSilenced:
+            type: boolean
+            nullable: false
+            column: ADMIN_SILENCED
+        visitsArchived:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: VISITS_ARCHIVED
+        visitsTotal:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: VISITS_TOTAL
+        candlesAvailable:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '7'
+            column: CANDLES_AVAILABLE
+        candlesUsed:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: CANDLES_USED
+        premium:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: PREMIUM
+        premiumAutorenew:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: PREMIUM_AUTORENEW
+        optUnits:
+            type: string
+            nullable: false
+            length: null
+            options:
+                fixed: false
+                default: METRIC
+            column: OPT_UNITS
+        public:
+            type: boolean
+            nullable: false
+            options:
+                default: '1'
+            column: PUBLIC
+        name:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+            column: NAME
+        firstName:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+            column: FIRST_NAME
+        lastName:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+            column: LAST_NAME
+        invisible:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: INVISIBLE
+        gender:
+            type: string
+            nullable: false
+            length: null
+            options:
+                fixed: false
+                default: ''
+            column: GENDER
+        status:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: STATUS
+        statusmedia:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: STATUSMEDIA
+        oldstatusmediatype:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+            column: oldSTATUSMEDIATYPE
+        oldstatusmediapath:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+            column: oldSTATUSMEDIAPATH
+        pic:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+                default: ''
+            column: PIC
+        picsPublic:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: PICS_PUBLIC
+        picsPrivate:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: PICS_PRIVATE
+        picsHidden:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: PICS_HIDDEN
+        vidsPublic:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: VIDS_PUBLIC
+        vidsPrivate:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: VIDS_PRIVATE
+        vidsHidden:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: VIDS_HIDDEN
+        showContactsTo:
+            type: string
+            nullable: false
+            length: null
+            options:
+                fixed: false
+                default: EVERYONE
+            column: SHOW_CONTACTS_TO
+        zodSun:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: ZOD_SUN
+        zodRising:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: ZOD_RISING
+        zodChinese:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: ZOD_CHINESE
+        geoDisplay:
+            type: string
+            nullable: false
+            length: null
+            options:
+                fixed: false
+            column: GEO_DISPLAY
+        geoLat:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            column: GEO_LAT
+        geoLng:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            column: GEO_LNG
+        geoDate:
+            type: datetime
+            nullable: false
+            options:
+                default: '0000-00-00 00:00:00'
+            column: GEO_DATE
+        persoSelfportrait:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: PERSO_SELFPORTRAIT
+        persoQualities:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: PERSO_QUALITIES
+        persoFlaws:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: PERSO_FLAWS
+        persoSmoke:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: PERSO_SMOKE
+        persoDrink:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: PERSO_DRINK
+        persoEducation:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: PERSO_EDUCATION
+        persoOccupation:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: PERSO_OCCUPATION
+        persoLanguages:
+            type: simple_array
+            nullable: false
+            length: null
+            options:
+                fixed: false
+            column: PERSO_LANGUAGES
+        persoLanguagesOther:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: PERSO_LANGUAGES_OTHER
+        likesLikes:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: LIKES_LIKES
+        likesDislikes:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: LIKES_DISLIKES
+        likesCinema:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: LIKES_CINEMA
+        likesMusic:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: LIKES_MUSIC
+        likesTv:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: LIKES_TV
+        likesBooks:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: LIKES_BOOKS
+        likesGames:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: LIKES_GAMES
+        likesTravel:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: LIKES_TRAVEL
+        likesClubs:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: LIKES_CLUBS
+        likesFood:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: LIKES_FOOD
+        likesClothes:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: LIKES_CLOTHES
+        contact:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: CONTACT
+        contRatingPoints:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            column: CONT_RATING_POINTS
+        contRatingNumber:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            column: CONT_RATING_NUMBER
+        contRatingAverage:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            column: CONT_RATING_AVERAGE
+        contFrienders:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            column: CONT_FRIENDERS
+        contFriendees:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            column: CONT_FRIENDEES
+        facebookId:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+            column: FACEBOOK_ID
+        facebookUrl:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: FACEBOOK_URL
+    lifecycleCallbacks: {  }

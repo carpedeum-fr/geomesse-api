@@ -1,0 +1,43 @@
+CarpeDeumBundle\Entity\TeaserEmail2:
+    type: entity
+    table: TEASER_EMAILS2
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        date:
+            type: datetime
+            nullable: false
+            options:
+                default: '0000-00-00 00:00:00'
+            column: DATE
+        platform:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+            column: PLATFORM
+        email:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+            column: EMAIL
+        ip:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+            column: IP
+    lifecycleCallbacks: {  }

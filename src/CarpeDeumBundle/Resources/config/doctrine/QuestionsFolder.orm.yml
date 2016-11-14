@@ -1,0 +1,48 @@
+CarpeDeumBundle\Entity\QuestionsFolder:
+    type: entity
+    table: QUESTIONS_FOLDERS
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            column: ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        lang:
+            type: string
+            nullable: false
+            length: 5
+            options:
+                fixed: true
+            column: LANG
+        parent:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            column: PARENT
+        sortorder:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            column: SORTORDER
+        title:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: TITLE
+        image:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: IMAGE
+    lifecycleCallbacks: {  }

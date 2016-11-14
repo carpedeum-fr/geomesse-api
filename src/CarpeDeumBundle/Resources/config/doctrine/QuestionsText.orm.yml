@@ -1,0 +1,48 @@
+CarpeDeumBundle\Entity\QuestionsText:
+    type: entity
+    table: QUESTIONS_TEXT
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            column: ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        lang:
+            type: string
+            nullable: false
+            length: 5
+            options:
+                fixed: true
+            column: LANG
+        parent:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            column: PARENT
+        sortorder:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            column: SORTORDER
+        question:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: QUESTION
+        answer:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: ANSWER
+    lifecycleCallbacks: {  }

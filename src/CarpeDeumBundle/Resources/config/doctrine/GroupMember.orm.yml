@@ -1,0 +1,29 @@
+CarpeDeumBundle\Entity\GroupMember:
+    type: entity
+    table: GROUPMEMBERS
+    id:
+        groupId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+            id: true
+            column: GROUP_ID
+        accountId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+            id: true
+            column: ACCOUNT_ID
+    fields:
+        membership:
+            type: string
+            nullable: true
+            length: null
+            options:
+                fixed: false
+            column: MEMBERSHIP
+    lifecycleCallbacks: {  }

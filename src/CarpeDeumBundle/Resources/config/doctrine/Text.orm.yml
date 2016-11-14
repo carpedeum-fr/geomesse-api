@@ -1,0 +1,90 @@
+CarpeDeumBundle\Entity\Text:
+    type: entity
+    table: TEXT
+    uniqueConstraints:
+        LANG:
+            columns:
+                - LANG
+                - NAME
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            column: ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        lang:
+            type: string
+            nullable: false
+            length: 5
+            options:
+                fixed: true
+            column: LANG
+        name:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+            column: NAME
+        title:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: TITLE
+        text:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: TEXT
+        image:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+            column: IMAGE
+        imageCredits:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: IMAGE_CREDITS
+        images:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: IMAGES
+        byline:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: BYLINE
+        numComments:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: NUM_COMMENTS
+        numLikes:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: NUM_LIKES
+    lifecycleCallbacks: {  }

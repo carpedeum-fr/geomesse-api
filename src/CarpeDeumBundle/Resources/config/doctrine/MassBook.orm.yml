@@ -1,0 +1,87 @@
+CarpeDeumBundle\Entity\MassBook:
+    type: entity
+    table: MASSBOOK
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            column: ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        lang:
+            type: string
+            nullable: false
+            length: 5
+            options:
+                fixed: true
+            column: LANG
+        parent:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            column: PARENT
+        sortorder:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            column: SORTORDER
+        title:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: TITLE
+        text:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: TEXT
+        credits:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: CREDITS
+        image:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: IMAGE
+        imageCredits:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: IMAGE_CREDITS
+        audio:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: AUDIO
+        audioCredits:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: AUDIO_CREDITS
+        audioOnly:
+            type: boolean
+            nullable: false
+            column: AUDIO_ONLY
+    lifecycleCallbacks: {  }

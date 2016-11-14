@@ -1,0 +1,31 @@
+CarpeDeumBundle\Entity\ContactNote:
+    type: entity
+    table: CONTACTNOTES
+    id:
+        fromAccountId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            column: FROM_ACCOUNT_ID
+        toAccountId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            column: TO_ACCOUNT_ID
+    fields:
+        bookmark:
+            type: boolean
+            nullable: false
+            column: BOOKMARK
+        notes:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: NOTES
+    lifecycleCallbacks: {  }

@@ -1,0 +1,63 @@
+CarpeDeumBundle\Entity\Session:
+    type: entity
+    table: SESSIONS
+    indexes:
+        ACCOUNT_ID:
+            columns:
+                - ACCOUNT_ID
+                - SESSION_ID
+    id: {  }
+    fields:
+        accountId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: ACCOUNT_ID
+        sessionId:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+            column: SESSION_ID
+        sessionType:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+            column: SESSION_TYPE
+        latestIpAddress:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+            column: LATEST_IP_ADDRESS
+        latestIpDate:
+            type: datetime
+            nullable: false
+            options:
+                default: '0000-00-00 00:00:00'
+            column: LATEST_IP_DATE
+        latestUseragent:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: LATEST_USERAGENT
+        latestLang:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+            column: LATEST_LANG
+    lifecycleCallbacks: {  }

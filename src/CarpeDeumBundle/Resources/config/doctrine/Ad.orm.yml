@@ -1,0 +1,78 @@
+CarpeDeumBundle\Entity\Ad:
+    type: entity
+    table: ADS
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            column: ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        accesskey:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+            column: ACCESSKEY
+        title:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: TITLE
+        url:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: URL
+        image:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: IMAGE
+        imageHd:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: IMAGE_HD
+        imageWidth:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: IMAGE_WIDTH
+        imageHeight:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: IMAGE_HEIGHT
+        background:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: BACKGROUND
+        backgroundHd:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: BACKGROUND_HD
+    lifecycleCallbacks: {  }

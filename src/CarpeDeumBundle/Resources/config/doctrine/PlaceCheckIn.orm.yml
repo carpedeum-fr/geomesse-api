@@ -1,0 +1,66 @@
+CarpeDeumBundle\Entity\PlaceCheckIn:
+    type: entity
+    table: PLACECHECKINS
+    indexes:
+        PLACE_ID:
+            columns:
+                - PLACE_ID
+                - DATE
+    id:
+        accountId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            id: true
+            column: ACCOUNT_ID
+        date:
+            type: datetime
+            nullable: false
+            options:
+                default: '0000-00-00 00:00:00'
+            id: true
+            column: DATE
+    fields:
+        accountName:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+            column: ACCOUNT_NAME
+        accountPic:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+            column: ACCOUNT_PIC
+        placeId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: PLACE_ID
+        comment:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: COMMENT
+        hidden:
+            type: boolean
+            nullable: false
+            column: HIDDEN
+        adminHidden:
+            type: boolean
+            nullable: false
+            column: ADMIN_HIDDEN
+        adminSilenced:
+            type: boolean
+            nullable: false
+            column: ADMIN_SILENCED
+    lifecycleCallbacks: {  }

@@ -1,0 +1,113 @@
+CarpeDeumBundle\Entity\UserPic:
+    type: entity
+    table: USERPICS
+    indexes:
+        ACCOUNT_ID:
+            columns:
+                - ACCOUNT_ID
+        MODERATOR:
+            columns:
+                - MODERATOR
+                - SUBMODERATED
+                - SUBMODERATORS
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            column: ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        accountId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: ACCOUNT_ID
+        ipAddress:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+                default: ''
+            column: IP_ADDRESS
+        ipDate:
+            type: datetime
+            nullable: false
+            options:
+                default: '0000-00-00 00:00:00'
+            column: IP_DATE
+        path:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+                default: ''
+            column: PATH
+        width:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: WIDTH
+        height:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: HEIGHT
+        hidden:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: HIDDEN
+        dateUpload:
+            type: datetime
+            nullable: false
+            options:
+                default: '0000-00-00 00:00:00'
+            column: DATE_UPLOAD
+        dateModer:
+            type: datetime
+            nullable: false
+            options:
+                default: '0000-00-00 00:00:00'
+            column: DATE_MODER
+        moderator:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: MODERATOR
+        submoderated:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: SUBMODERATED
+        submoderators:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+            column: SUBMODERATORS
+        submoderatorlog:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: SUBMODERATORLOG
+    lifecycleCallbacks: {  }

@@ -1,0 +1,222 @@
+CarpeDeumBundle\Entity\Classified:
+    type: entity
+    table: CLASSIFIEDS
+    indexes:
+        ACCOUNT_ID:
+            columns:
+                - ACCOUNT_ID
+                - DATE
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            column: ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        accountId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: ACCOUNT_ID
+        accountName:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+            column: ACCOUNT_NAME
+        accountPic:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+            column: ACCOUNT_PIC
+        ipAddress:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+            column: IP_ADDRESS
+        date:
+            type: datetime
+            nullable: false
+            options:
+                default: '0000-00-00 00:00:00'
+            column: DATE
+        type:
+            type: string
+            nullable: false
+            length: null
+            options:
+                fixed: false
+                default: TIP
+            column: TYPE
+        title:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: TITLE
+        text:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: TEXT
+        pic:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: PIC
+        media:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: MEDIA
+        geoLat:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            options:
+                default: '0'
+            column: GEO_LAT
+        geoLng:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            options:
+                default: '0'
+            column: GEO_LNG
+        private:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: PRIVATE
+        allowComments:
+            type: boolean
+            nullable: false
+            options:
+                default: '1'
+            column: ALLOW_COMMENTS
+        numComments:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: NUM_COMMENTS
+        numPings:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+            column: NUM_PINGS
+        numLikes:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+            column: NUM_LIKES
+        numPrayed:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+            column: NUM_PRAYED
+        numCandles:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+            column: NUM_CANDLES
+        latestCandle:
+            type: datetime
+            nullable: false
+            options:
+                default: '0000-00-00 00:00:00'
+            column: LATEST_CANDLE
+        oldcommStatus:
+            type: string
+            nullable: false
+            length: null
+            options:
+                fixed: false
+                default: DEFAULT
+            column: oldCOMM_STATUS
+        oldcommFromFriends:
+            type: string
+            nullable: false
+            length: null
+            options:
+                fixed: false
+                default: DEFAULT
+            column: oldCOMM_FROM_FRIENDS
+        oldcommFromStrangers:
+            type: string
+            nullable: false
+            length: null
+            options:
+                fixed: false
+                default: DEFAULT
+            column: oldCOMM_FROM_STRANGERS
+        oldcommFromVisitors:
+            type: string
+            nullable: false
+            length: null
+            options:
+                fixed: false
+                default: DEFAULT
+            column: oldCOMM_FROM_VISITORS
+        oldcommNumber:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: oldCOMM_NUMBER
+        hidden:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: HIDDEN
+        adminHidden:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: ADMIN_HIDDEN
+        adminSilenced:
+            type: boolean
+            nullable: false
+            column: ADMIN_SILENCED
+        moderator:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: MODERATOR
+    lifecycleCallbacks: {  }

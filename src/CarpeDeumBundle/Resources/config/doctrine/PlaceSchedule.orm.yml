@@ -1,0 +1,52 @@
+CarpeDeumBundle\Entity\PlaceSchedule:
+    type: entity
+    table: PLACESCHEDULE
+    indexes:
+        PLACE_ID:
+            columns:
+                - PLACE_ID
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        placeId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            column: PLACE_ID
+        kind:
+            type: string
+            nullable: false
+            length: null
+            options:
+                fixed: false
+                default: WEEKDAY
+            column: KIND
+        dayofweek:
+            type: string
+            nullable: false
+            length: null
+            options:
+                fixed: false
+            column: DAYOFWEEK
+        time:
+            type: time
+            nullable: false
+            column: TIME
+        notes:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+            column: NOTES
+    lifecycleCallbacks: {  }
