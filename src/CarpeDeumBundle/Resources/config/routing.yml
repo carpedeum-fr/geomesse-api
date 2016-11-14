@@ -1,0 +1,3 @@
+carpe_deum_homepage:
+    path:     /
+    defaults: { _controller: CarpeDeumBundle:Default:index }
