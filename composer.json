@@ -18,7 +18,7 @@
     },
     "require": {
         "php": ">=5.5.9",
-        "symfony/symfony": "3.1.*",
+        "symfony/symfony": "3.2.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
@@ -29,7 +29,8 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
 
-        "friendsofsymfony/rest-bundle": "~2.1"
+        "friendsofsymfony/rest-bundle": "~2.1",
+        "sylius/resource": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
