@@ -1,0 +1,41 @@
+data:
+  image: busybox
+  volumes:
+    - /data
+
+db:
+  image: mysql:8.0.0
+  volumes_from:
+    - data
+  ports:
+    - "5432:5432"
+
+api:
+  image: whatwedo/symfony3:latest
+  volumes:
+    - ./api:/app
+  working_dir: /app
+  links:
+   - db
+  ports:
+    - "8000:8000"
+  environment:
+    HOST: "0.0.0.0"
+    PORT: "8000"
+    DB_DATABASE: mysql
+    DB_USERNAME: mysql
+
+app:
+  image: node:wheezy
+  volumes:
+    - ./client:/app
+  working_dir: /app
+  ports:
+    - "8083:8083"
+    # livereload port
+    - "35729:35729"
+  links:
+    - api
+  environment:
+    APP_PORT: "8083"
+  command: npm run watch
