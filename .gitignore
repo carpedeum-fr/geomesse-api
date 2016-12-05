@@ -6,5 +6,7 @@
 !var/logs/.gitkeep
 /var/phpunit.xml
 /bin/
-/vendor/
-/web/bundles/
+api/vendor/
+api/web/bundles/
+docker-compose.dev.yml
+
