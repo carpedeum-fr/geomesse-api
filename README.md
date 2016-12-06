@@ -1,6 +1,8 @@
 carpedeum
 =========
 
+[![CircleCI](https://circleci.com/gh/carpedeum-fr/carpedeum/tree/master.svg?style=svg)](https://circleci.com/gh/carpedeum-fr/carpedeum/tree/master)
+
 CarpeDeum DB
 
 Here is [the doc for reverse engineering](http://symfony.com/doc/current/doctrine/reverse_engineering.html). 
