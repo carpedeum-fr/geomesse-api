@@ -3,6 +3,8 @@ carpedeum
 
 CarpeDeum DB
 
+Here is [the doc for reverse engineering](http://symfony.com/doc/current/doctrine/reverse_engineering.html). 
+
 — prerequisites :
 ```
 SET sql_mode=(SELECT REPLACE(@@sql_mode,'NO_ZERO_DATE',''));
