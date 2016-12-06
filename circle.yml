@@ -1,0 +1,32 @@
+machine:
+  timezone:
+    Europe/Paris
+  php:
+    version: 7.0.11
+  environment:
+    DB_NAME: "carpedeum_test"
+
+dependencies:
+  cache_directories:
+    - ~/.composer/cache
+  override:
+    - composer install --prefer-source --no-interaction
+  pre:
+    - yes '' | pecl install -f apcu apcu_bc
+    - echo "extension=apcu.so" | sudo tee -a /opt/circleci/php/$(phpenv global)/etc/php.ini
+    - echo "extension=apc.so" | sudo tee -a /opt/circleci/php/$(phpenv global)/etc/php.ini
+  post:
+    - cp app/config/parameters.yml.circle app/config/parameters.yml
+
+database:
+  override:
+    - php app/console doctrine:schema:create --env=test
+    - echo "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));" | mysql
+
+test:
+  override:
+    - composer validate
+    - bin/phpspec run
+  post:
+    - "cat app/logs/test.log|grep -E 'CRITICAL|ERROR'>app/logs/test_error.log || :"
+    - cp app/logs/test_error.log $CIRCLE_TEST_REPORTS/test.log
