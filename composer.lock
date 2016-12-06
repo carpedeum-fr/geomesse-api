@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ec69957318c554b6d5d2e22aa3120262",
-    "content-hash": "57fbd5227ad94144c5fa5770d148d50e",
+    "hash": "ec73065e85c1cac73fbcb3c10f7f8b17",
+    "content-hash": "efa57be5d6290a7191b803263b2da7a2",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -405,19 +405,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "78b99e3577b53118edec55a843df77568b787a1a"
+                "reference": "ea0cf9fb5bf69c2d92e4d279bbab894eec3a2d2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/78b99e3577b53118edec55a843df77568b787a1a",
-                "reference": "78b99e3577b53118edec55a843df77568b787a1a",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/ea0cf9fb5bf69c2d92e4d279bbab894eec3a2d2c",
+                "reference": "ea0cf9fb5bf69c2d92e4d279bbab894eec3a2d2c",
                 "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "~2.3",
                 "doctrine/doctrine-cache-bundle": "~1.0",
                 "jdorn/sql-formatter": "~1.1",
-                "ocramius/proxy-manager": "^1.0|^2.0",
                 "php": ">=5.3.9",
                 "symfony/console": "~2.7|~3.0",
                 "symfony/dependency-injection": "~2.7|~3.0",
@@ -479,7 +478,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2016-12-05 18:39:09"
+            "time": "2016-12-06 14:40:12"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -568,6 +567,67 @@
                 "caching"
             ],
             "time": "2016-01-26 17:28:51"
+        },
+        {
+            "name": "doctrine/doctrine-migrations-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
+                "reference": "6276139e0b913a4e5120fc36bb5b0eae8ac549bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/6276139e0b913a4e5120fc36bb5b0eae8ac549bc",
+                "reference": "6276139e0b913a4e5120fc36bb5b0eae8ac549bc",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "~1.0",
+                "doctrine/migrations": "^1.1",
+                "php": ">=5.4.0",
+                "symfony/framework-bundle": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Bundle\\MigrationsBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Doctrine Project",
+                    "homepage": "http://www.doctrine-project.org"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony DoctrineMigrationsBundle",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "dbal",
+                "migrations",
+                "schema"
+            ],
+            "time": "2016-12-05 18:36:37"
         },
         {
             "name": "doctrine/inflector",
@@ -743,6 +803,80 @@
                 "parser"
             ],
             "time": "2014-09-09 13:34:57"
+        },
+        {
+            "name": "doctrine/migrations",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/migrations.git",
+                "reference": "15768bae779cb45c376416aaf6c611284380159b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/15768bae779cb45c376416aaf6c611284380159b",
+                "reference": "15768bae779cb45c376416aaf6c611284380159b",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "~2.2",
+                "ocramius/proxy-manager": "^1.0|^2.0",
+                "php": "^5.5|^7.0",
+                "symfony/console": "~2.3|~3.0",
+                "symfony/yaml": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "dev-master",
+                "doctrine/orm": "2.*",
+                "jdorn/sql-formatter": "~1.1",
+                "johnkary/phpunit-speedtrap": "~1.0@dev",
+                "mikey179/vfsstream": "^1.6",
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "~4.7",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "suggest": {
+                "jdorn/sql-formatter": "Allows to generate formatted SQL with the diff command."
+            },
+            "bin": [
+                "bin/doctrine-migrations"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "v1.5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\DBAL\\Migrations\\": "lib/Doctrine/DBAL/Migrations"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Michael Simonson",
+                    "email": "contact@mikesimonson.com"
+                }
+            ],
+            "description": "Database Schema migrations using Doctrine DBAL",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "database",
+                "migrations"
+            ],
+            "time": "2016-11-29 21:26:39"
         },
         {
             "name": "doctrine/orm",
@@ -1827,12 +1961,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "e64947de9ebc37732a62f5115164484a9bee7fa6"
+                "reference": "d294b0665cf09c799e9c1993d5c776a5bf55cb85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/e64947de9ebc37732a62f5115164484a9bee7fa6",
-                "reference": "e64947de9ebc37732a62f5115164484a9bee7fa6",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/d294b0665cf09c799e9c1993d5c776a5bf55cb85",
+                "reference": "d294b0665cf09c799e9c1993d5c776a5bf55cb85",
                 "shasum": ""
             },
             "require": {
@@ -1871,7 +2005,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2016-10-30 23:18:01"
+            "time": "2016-12-06 07:29:27"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -2039,12 +2173,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "12a6329c24d08fb97bcf10128365757f845dc140"
+                "reference": "968cd5302dba8d60ddb64489069953fae2ff1a92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/12a6329c24d08fb97bcf10128365757f845dc140",
-                "reference": "12a6329c24d08fb97bcf10128365757f845dc140",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/968cd5302dba8d60ddb64489069953fae2ff1a92",
+                "reference": "968cd5302dba8d60ddb64489069953fae2ff1a92",
                 "shasum": ""
             },
             "require": {
@@ -2084,7 +2218,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-11-24 01:01:52"
+            "time": "2016-12-06 13:58:36"
         },
         {
             "name": "sylius/resource",
@@ -2162,12 +2296,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusResourceBundle.git",
-                "reference": "964677d6f12b69d709bc48b50b805950b9b93193"
+                "reference": "154aacbab2abb067b55f8e57c9a4e8d922e7be64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusResourceBundle/zipball/964677d6f12b69d709bc48b50b805950b9b93193",
-                "reference": "964677d6f12b69d709bc48b50b805950b9b93193",
+                "url": "https://api.github.com/repos/Sylius/SyliusResourceBundle/zipball/154aacbab2abb067b55f8e57c9a4e8d922e7be64",
+                "reference": "154aacbab2abb067b55f8e57c9a4e8d922e7be64",
                 "shasum": ""
             },
             "require": {
@@ -2251,7 +2385,7 @@
                 "storage",
                 "sylius"
             ],
-            "time": "2016-12-02 01:13:32"
+            "time": "2016-12-06 02:42:33"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -2715,12 +2849,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "456e68bae52ad820113abd9ab55f98cf8c4d857f"
+                "reference": "16cea37359040502519324d96946ebfb36213889"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/456e68bae52ad820113abd9ab55f98cf8c4d857f",
-                "reference": "456e68bae52ad820113abd9ab55f98cf8c4d857f",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/16cea37359040502519324d96946ebfb36213889",
+                "reference": "16cea37359040502519324d96946ebfb36213889",
                 "shasum": ""
             },
             "require": {
@@ -2849,7 +2983,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-12-05 13:20:31"
+            "time": "2016-12-06 11:12:10"
         },
         {
             "name": "twig/twig",
