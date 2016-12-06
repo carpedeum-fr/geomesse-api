@@ -10,13 +10,12 @@ dependencies:
   cache_directories:
     - ~/.composer/cache
   override:
+    - cp app/config/parameters.yml.circle app/config/parameters.yml
     - composer install --prefer-source --no-interaction
   pre:
     - yes '' | pecl install -f apcu apcu_bc
     - echo "extension=apcu.so" | sudo tee -a /opt/circleci/php/$(phpenv global)/etc/php.ini
     - echo "extension=apc.so" | sudo tee -a /opt/circleci/php/$(phpenv global)/etc/php.ini
-  post:
-    - cp app/config/parameters.yml.circle app/config/parameters.yml
 
 database:
   override:
