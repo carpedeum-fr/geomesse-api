@@ -5,17 +5,20 @@ namespace CarpeDeumBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Places
+ * Place
  *
- * @ORM\Table(name="PLACES", indexes={@ORM\Index(name="GEO_LAT", columns={"GEO_LAT", "GEO_LNG"}), @ORM\Index(name="IMPORT_SOURCE", columns={"IMPORT_SOURCE", "IMPORT_ID"})})
+ * @ORM\Table(name="place", indexes={
+ *     @ORM\Index(name="GEO_LAT", columns={"GEO_LAT", "GEO_LNG"}),
+ *     @ORM\Index(name="IMPORT_SOURCE", columns={"IMPORT_SOURCE", "IMPORT_ID"})
+ * })
  * @ORM\Entity
  */
-class Places
+class Place
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="ID", type="bigint", options={"unsigned"=true})
+     * @ORM\Column(name="id", type="bigint", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,212 +27,203 @@ class Places
     /**
      * @var string
      *
-     * @ORM\Column(name="NAME", type="string", length=100, nullable=false)
+     * @ORM\Column(name="name", type="string", length=100)
      */
-    private $name = '';
+    private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="TYPE", type="string", nullable=false)
+     * @ORM\Column(name="type", type="string")
      */
     private $type = 'CHURCH';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ancien_type", type="string", length=100, nullable=false)
-     */
-    private $ancienType = '';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="PIC", type="string", length=200, nullable=false)
+     * @ORM\Column(name="pic", type="string", length=200)
      */
     private $pic = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="PIC_CREDITS", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="pic_credits", type="text")
      */
     private $picCredits;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="PICS", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="pics", type="text")
      */
     private $pics;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="PICS_LIST", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="pics_list", type="text")
      */
     private $picsList;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="VIDS", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="vids", type="text")
      */
     private $vids;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="VIDS_LIST", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="vids_list", type="text")
      */
     private $vidsList;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="GEO_LAT", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="geo_lat", type="float", precision=10, scale=0)
      */
     private $geoLat = '0';
 
     /**
      * @var float
      *
-     * @ORM\Column(name="GEO_LNG", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="geo_lng", type="float", precision=10, scale=0)
      */
     private $geoLng = '0';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_ADDRESS", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="info_address", type="text")
      */
     private $infoAddress;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_ADDRESS_1", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="info_address_1", type="text")
      */
     private $infoAddress1;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_ADDRESS_2", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="info_address_2", type="text")
      */
     private $infoAddress2;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_ADDRESS_ZIP", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="zip_code", type="text")
      */
     private $infoAddressZip;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_ADDRESS_CITY", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="city", type="text")
      */
     private $infoAddressCity;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_ADDRESS_COUNTRY", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="country", type="text")
      */
     private $infoAddressCountry;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_URL", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="url", type="text")
      */
     private $infoUrl;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_TEL", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="telephone", type="text")
      */
     private $infoTel;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_HISTORY", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="history", type="text")
      */
     private $infoHistory;
 
     /**
+     * @ORM\OneToMany(targetEntity="\CarpeDeumBundle\Entity\Time", mappedBy="place")
+     */
+    private $timetable;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="SCHEDULE_NOTES", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="schedule_notes", type="text")
      */
     private $scheduleNotes;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="SCHEDULE_EUCHARIST", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="schedule_eucharist", type="text")
      */
     private $scheduleEucharist;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="ancien_id", type="bigint", nullable=false, options={"unsigned"=true})
-     */
-    private $ancienId = '0';
-
-    /**
      * @var \DateTime
      *
-     * @ORM\Column(name="MODIFIED", type="datetime", nullable=false)
+     * @ORM\Column(name="modified", type="datetime", nullable=true)
      */
-    private $modified = 'CURRENT_TIMESTAMP';
+    private $modified;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="IMPORT_SOURCE", type="string", length=100, nullable=false)
+     * @ORM\Column(name="import_source", type="string", length=100)
      */
-    private $importSource = '';
+    private $importSource;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="IMPORT_ID", type="string", length=100, nullable=false)
+     * @ORM\Column(name="import_id", type="string", length=100)
      */
-    private $importId = '';
+    private $importId;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="IMPORT_MODIFIED", type="datetime", nullable=false)
+     * @ORM\Column(name="import_modified", type="datetime", nullable=true)
      */
-    private $importModified = '0000-00-00 00:00:00';
+    private $importModified;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="NUM_COMMENTS", type="bigint", nullable=false, options={"unsigned"=true})
+     * @ORM\Column(name="nb_comments", type="bigint", options={"unsigned"=true})
      */
-    private $numComments = '0';
+    private $numComments;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="NUM_LIKES", type="bigint", nullable=false, options={"unsigned"=true})
+     * @ORM\Column(name="nb_likes", type="bigint", options={"unsigned"=true})
      */
-    private $numLikes = '0';
+    private $numLikes;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="NUM_CHECKINS", type="bigint", nullable=false, options={"unsigned"=true})
+     * @ORM\Column(name="nb_checkins", type="bigint", options={"unsigned"=true})
      */
-    private $numCheckins = '0';
+    private $numCheckins;
 
     /**
      * @return int
@@ -277,22 +271,6 @@ class Places
     public function setType($type)
     {
         $this->type = $type;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAncienType()
-    {
-        return $this->ancienType;
-    }
-
-    /**
-     * @param string $ancienType
-     */
-    public function setAncienType($ancienType)
-    {
-        $this->ancienType = $ancienType;
     }
 
     /**
@@ -597,22 +575,6 @@ class Places
     public function setScheduleEucharist($scheduleEucharist)
     {
         $this->scheduleEucharist = $scheduleEucharist;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAncienId()
-    {
-        return $this->ancienId;
-    }
-
-    /**
-     * @param int $ancienId
-     */
-    public function setAncienId($ancienId)
-    {
-        $this->ancienId = $ancienId;
     }
 
     /**

@@ -5,54 +5,52 @@ namespace CarpeDeumBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Placeschedule
+ * Time
  *
- * @ORM\Table(name="PLACESCHEDULE", indexes={@ORM\Index(name="PLACE_ID", columns={"PLACE_ID"})})
+ * @ORM\Table(name="time")
  * @ORM\Entity
  */
-class Placeschedule
+class Time
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="ID", type="bigint")
+     * @ORM\Column(name="id", type="bigint")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="PLACE_ID", type="bigint", nullable=false, options={"unsigned"=true})
+     * @ORM\ManyToOne(targetEntity="\CarpeDeumBundle\Entity\Place", inversedBy="timetable")
      */
-    private $placeId = '0';
+    private $place;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="KIND", type="string", nullable=false)
+     * @ORM\Column(name="kind", type="string", nullable=false)
      */
     private $kind = 'WEEKDAY';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="DAYOFWEEK", type="string", nullable=false)
+     * @ORM\Column(name="day_of_week", type="string", nullable=false)
      */
-    private $dayofweek;
+    private $dayOfWeek;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="TIME", type="time", nullable=false)
+     * @ORM\Column(name="time", type="time", nullable=false)
      */
     private $time;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="NOTES", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="notes", type="text", length=65535, nullable=false)
      */
     private $notes;
 
@@ -107,17 +105,17 @@ class Placeschedule
     /**
      * @return string
      */
-    public function getDayofweek()
+    public function getDayOfWeek()
     {
-        return $this->dayofweek;
+        return $this->dayOfWeek;
     }
 
     /**
-     * @param string $dayofweek
+     * @param string $dayOfWeek
      */
-    public function setDayofweek($dayofweek)
+    public function setDayOfWeek($dayOfWeek)
     {
-        $this->dayofweek = $dayofweek;
+        $this->dayOfWeek = $dayOfWeek;
     }
 
     /**
