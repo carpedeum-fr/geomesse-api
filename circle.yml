@@ -20,7 +20,7 @@ dependencies:
 
 database:
   override:
-    - php app/console doctrine:schema:create --env=test
+    - php bin/console doctrine:schema:create --env=test
     - echo "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));" | mysql
 
 test:
@@ -28,5 +28,5 @@ test:
     - composer validate
     - bin/phpspec run
   post:
-    - "cat app/logs/test.log|grep -E 'CRITICAL|ERROR'>app/logs/test_error.log || :"
-    - cp app/logs/test_error.log $CIRCLE_TEST_REPORTS/test.log
+    - "cat var/logs/test.log|grep -E 'CRITICAL|ERROR'>var/logs/test_error.log || :"
+    - cp var/logs/test_error.log $CIRCLE_TEST_REPORTS/test.log
