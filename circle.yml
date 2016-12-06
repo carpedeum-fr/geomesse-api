@@ -25,7 +25,6 @@ database:
 test:
   override:
     - composer validate
-    - bin/phpspec run
   post:
     - "cat var/logs/test.log|grep -E 'CRITICAL|ERROR'>var/logs/test_error.log || :"
     - cp var/logs/test_error.log $CIRCLE_TEST_REPORTS/test.log

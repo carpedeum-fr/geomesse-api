@@ -1,5 +1,6 @@
 {
     "name": "laurent/carpedeum",
+    "description": "CarpeDeum and GeoMesse",
     "license": "MIT",
     "type": "project",
     "minimum-stability": "dev",
