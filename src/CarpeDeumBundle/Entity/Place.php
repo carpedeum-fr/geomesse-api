@@ -7,15 +7,18 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Place
  *
- * @ORM\Table(name="PLACES", indexes={@ORM\Index(name="GEO_LAT", columns={"GEO_LAT", "GEO_LNG"}), @ORM\Index(name="IMPORT_SOURCE", columns={"IMPORT_SOURCE", "IMPORT_ID"})})
+ * @ORM\Table(name="place", indexes={
+ *     @ORM\Index(name="GEO_LAT", columns={"GEO_LAT", "GEO_LNG"}),
+ *     @ORM\Index(name="IMPORT_SOURCE", columns={"IMPORT_SOURCE", "IMPORT_ID"})
+ * })
  * @ORM\Entity
  */
 class Place
 {
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="ID", type="bigint")
+     * @ORM\Column(name="id", type="bigint", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,219 +27,206 @@ class Place
     /**
      * @var string
      *
-     * @ORM\Column(name="NAME", type="string", length=100, nullable=false)
+     * @ORM\Column(name="name", type="string", length=100)
      */
-    private $name = '';
+    private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="TYPE", type="string", nullable=false)
+     * @ORM\Column(name="type", type="string")
      */
     private $type = 'CHURCH';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ancien_type", type="string", length=100, nullable=false)
-     */
-    private $ancienType = '';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="PIC", type="string", length=200, nullable=false)
+     * @ORM\Column(name="pic", type="string", length=200)
      */
     private $pic = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="PIC_CREDITS", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="pic_credits", type="text")
      */
     private $picCredits;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="PICS", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="pics", type="text")
      */
     private $pics;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="PICS_LIST", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="pics_list", type="text")
      */
     private $picsList;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="VIDS", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="vids", type="text")
      */
     private $vids;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="VIDS_LIST", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="vids_list", type="text")
      */
     private $vidsList;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="GEO_LAT", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="geo_lat", type="float", precision=10, scale=0)
      */
     private $geoLat = '0';
 
     /**
      * @var float
      *
-     * @ORM\Column(name="GEO_LNG", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="geo_lng", type="float", precision=10, scale=0)
      */
     private $geoLng = '0';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_ADDRESS", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="info_address", type="text")
      */
     private $infoAddress;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_ADDRESS_1", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="info_address_1", type="text")
      */
     private $infoAddress1;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_ADDRESS_2", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="info_address_2", type="text")
      */
     private $infoAddress2;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_ADDRESS_ZIP", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="zip_code", type="text")
      */
     private $infoAddressZip;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_ADDRESS_CITY", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="city", type="text")
      */
     private $infoAddressCity;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_ADDRESS_COUNTRY", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="country", type="text")
      */
     private $infoAddressCountry;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_URL", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="url", type="text")
      */
     private $infoUrl;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_TEL", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="telephone", type="text")
      */
     private $infoTel;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="INFO_HISTORY", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="history", type="text")
      */
     private $infoHistory;
 
     /**
+     * @ORM\OneToMany(targetEntity="\CarpeDeumBundle\Entity\Time", mappedBy="place")
+     */
+    private $timetable;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="SCHEDULE_NOTES", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="schedule_notes", type="text")
      */
     private $scheduleNotes;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="SCHEDULE_EUCHARIST", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="schedule_eucharist", type="text")
      */
     private $scheduleEucharist;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="ancien_id", type="bigint", nullable=false)
-     */
-    private $ancienId = '0';
-
-    /**
      * @var \DateTime
      *
-     * @ORM\Column(name="MODIFIED", type="datetime", nullable=false)
+     * @ORM\Column(name="modified", type="datetime", nullable=true)
      */
-    private $modified = 'CURRENT_TIMESTAMP';
+    private $modified;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="IMPORT_SOURCE", type="string", length=100, nullable=false)
+     * @ORM\Column(name="import_source", type="string", length=100)
      */
-    private $importSource = '';
+    private $importSource;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="IMPORT_ID", type="string", length=100, nullable=false)
+     * @ORM\Column(name="import_id", type="string", length=100)
      */
-    private $importId = '';
+    private $importId;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="IMPORT_MODIFIED", type="datetime", nullable=false)
+     * @ORM\Column(name="import_modified", type="datetime", nullable=true)
      */
-    private $importModified = '0000-00-00 00:00:00';
+    private $importModified;
 
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="NUM_COMMENTS", type="bigint", nullable=false)
+     * @ORM\Column(name="nb_comments", type="bigint", options={"unsigned"=true})
      */
-    private $numComments = '0';
+    private $numComments;
 
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="NUM_LIKES", type="bigint", nullable=false)
+     * @ORM\Column(name="nb_likes", type="bigint", options={"unsigned"=true})
      */
-    private $numLikes = '0';
+    private $numLikes;
 
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="NUM_CHECKINS", type="bigint", nullable=false)
+     * @ORM\Column(name="nb_checkins", type="bigint", options={"unsigned"=true})
      */
-    private $numCheckins = '0';
-
-
+    private $numCheckins;
 
     /**
-     * Get id
-     *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -244,22 +234,14 @@ class Place
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Place
+     * @param int $id
      */
-    public function setName($name)
+    public function setId($id)
     {
-        $this->name = $name;
-
-        return $this;
+        $this->id = $id;
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -268,22 +250,14 @@ class Place
     }
 
     /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Place
+     * @param string $name
      */
-    public function setType($type)
+    public function setName($name)
     {
-        $this->type = $type;
-
-        return $this;
+        $this->name = $name;
     }
 
     /**
-     * Get type
-     *
      * @return string
      */
     public function getType()
@@ -292,46 +266,14 @@ class Place
     }
 
     /**
-     * Set ancienType
-     *
-     * @param string $ancienType
-     *
-     * @return Place
+     * @param string $type
      */
-    public function setAncienType($ancienType)
+    public function setType($type)
     {
-        $this->ancienType = $ancienType;
-
-        return $this;
+        $this->type = $type;
     }
 
     /**
-     * Get ancienType
-     *
-     * @return string
-     */
-    public function getAncienType()
-    {
-        return $this->ancienType;
-    }
-
-    /**
-     * Set pic
-     *
-     * @param string $pic
-     *
-     * @return Place
-     */
-    public function setPic($pic)
-    {
-        $this->pic = $pic;
-
-        return $this;
-    }
-
-    /**
-     * Get pic
-     *
      * @return string
      */
     public function getPic()
@@ -340,22 +282,14 @@ class Place
     }
 
     /**
-     * Set picCredits
-     *
-     * @param string $picCredits
-     *
-     * @return Place
+     * @param string $pic
      */
-    public function setPicCredits($picCredits)
+    public function setPic($pic)
     {
-        $this->picCredits = $picCredits;
-
-        return $this;
+        $this->pic = $pic;
     }
 
     /**
-     * Get picCredits
-     *
      * @return string
      */
     public function getPicCredits()
@@ -364,22 +298,14 @@ class Place
     }
 
     /**
-     * Set pics
-     *
-     * @param string $pics
-     *
-     * @return Place
+     * @param string $picCredits
      */
-    public function setPics($pics)
+    public function setPicCredits($picCredits)
     {
-        $this->pics = $pics;
-
-        return $this;
+        $this->picCredits = $picCredits;
     }
 
     /**
-     * Get pics
-     *
      * @return string
      */
     public function getPics()
@@ -388,22 +314,14 @@ class Place
     }
 
     /**
-     * Set picsList
-     *
-     * @param string $picsList
-     *
-     * @return Place
+     * @param string $pics
      */
-    public function setPicsList($picsList)
+    public function setPics($pics)
     {
-        $this->picsList = $picsList;
-
-        return $this;
+        $this->pics = $pics;
     }
 
     /**
-     * Get picsList
-     *
      * @return string
      */
     public function getPicsList()
@@ -412,22 +330,14 @@ class Place
     }
 
     /**
-     * Set vids
-     *
-     * @param string $vids
-     *
-     * @return Place
+     * @param string $picsList
      */
-    public function setVids($vids)
+    public function setPicsList($picsList)
     {
-        $this->vids = $vids;
-
-        return $this;
+        $this->picsList = $picsList;
     }
 
     /**
-     * Get vids
-     *
      * @return string
      */
     public function getVids()
@@ -436,22 +346,14 @@ class Place
     }
 
     /**
-     * Set vidsList
-     *
-     * @param string $vidsList
-     *
-     * @return Place
+     * @param string $vids
      */
-    public function setVidsList($vidsList)
+    public function setVids($vids)
     {
-        $this->vidsList = $vidsList;
-
-        return $this;
+        $this->vids = $vids;
     }
 
     /**
-     * Get vidsList
-     *
      * @return string
      */
     public function getVidsList()
@@ -460,22 +362,14 @@ class Place
     }
 
     /**
-     * Set geoLat
-     *
-     * @param float $geoLat
-     *
-     * @return Place
+     * @param string $vidsList
      */
-    public function setGeoLat($geoLat)
+    public function setVidsList($vidsList)
     {
-        $this->geoLat = $geoLat;
-
-        return $this;
+        $this->vidsList = $vidsList;
     }
 
     /**
-     * Get geoLat
-     *
      * @return float
      */
     public function getGeoLat()
@@ -484,22 +378,14 @@ class Place
     }
 
     /**
-     * Set geoLng
-     *
-     * @param float $geoLng
-     *
-     * @return Place
+     * @param float $geoLat
      */
-    public function setGeoLng($geoLng)
+    public function setGeoLat($geoLat)
     {
-        $this->geoLng = $geoLng;
-
-        return $this;
+        $this->geoLat = $geoLat;
     }
 
     /**
-     * Get geoLng
-     *
      * @return float
      */
     public function getGeoLng()
@@ -508,22 +394,14 @@ class Place
     }
 
     /**
-     * Set infoAddress
-     *
-     * @param string $infoAddress
-     *
-     * @return Place
+     * @param float $geoLng
      */
-    public function setInfoAddress($infoAddress)
+    public function setGeoLng($geoLng)
     {
-        $this->infoAddress = $infoAddress;
-
-        return $this;
+        $this->geoLng = $geoLng;
     }
 
     /**
-     * Get infoAddress
-     *
      * @return string
      */
     public function getInfoAddress()
@@ -532,22 +410,14 @@ class Place
     }
 
     /**
-     * Set infoAddress1
-     *
-     * @param string $infoAddress1
-     *
-     * @return Place
+     * @param string $infoAddress
      */
-    public function setInfoAddress1($infoAddress1)
+    public function setInfoAddress($infoAddress)
     {
-        $this->infoAddress1 = $infoAddress1;
-
-        return $this;
+        $this->infoAddress = $infoAddress;
     }
 
     /**
-     * Get infoAddress1
-     *
      * @return string
      */
     public function getInfoAddress1()
@@ -556,22 +426,14 @@ class Place
     }
 
     /**
-     * Set infoAddress2
-     *
-     * @param string $infoAddress2
-     *
-     * @return Place
+     * @param string $infoAddress1
      */
-    public function setInfoAddress2($infoAddress2)
+    public function setInfoAddress1($infoAddress1)
     {
-        $this->infoAddress2 = $infoAddress2;
-
-        return $this;
+        $this->infoAddress1 = $infoAddress1;
     }
 
     /**
-     * Get infoAddress2
-     *
      * @return string
      */
     public function getInfoAddress2()
@@ -580,22 +442,14 @@ class Place
     }
 
     /**
-     * Set infoAddressZip
-     *
-     * @param string $infoAddressZip
-     *
-     * @return Place
+     * @param string $infoAddress2
      */
-    public function setInfoAddressZip($infoAddressZip)
+    public function setInfoAddress2($infoAddress2)
     {
-        $this->infoAddressZip = $infoAddressZip;
-
-        return $this;
+        $this->infoAddress2 = $infoAddress2;
     }
 
     /**
-     * Get infoAddressZip
-     *
      * @return string
      */
     public function getInfoAddressZip()
@@ -604,22 +458,14 @@ class Place
     }
 
     /**
-     * Set infoAddressCity
-     *
-     * @param string $infoAddressCity
-     *
-     * @return Place
+     * @param string $infoAddressZip
      */
-    public function setInfoAddressCity($infoAddressCity)
+    public function setInfoAddressZip($infoAddressZip)
     {
-        $this->infoAddressCity = $infoAddressCity;
-
-        return $this;
+        $this->infoAddressZip = $infoAddressZip;
     }
 
     /**
-     * Get infoAddressCity
-     *
      * @return string
      */
     public function getInfoAddressCity()
@@ -628,22 +474,14 @@ class Place
     }
 
     /**
-     * Set infoAddressCountry
-     *
-     * @param string $infoAddressCountry
-     *
-     * @return Place
+     * @param string $infoAddressCity
      */
-    public function setInfoAddressCountry($infoAddressCountry)
+    public function setInfoAddressCity($infoAddressCity)
     {
-        $this->infoAddressCountry = $infoAddressCountry;
-
-        return $this;
+        $this->infoAddressCity = $infoAddressCity;
     }
 
     /**
-     * Get infoAddressCountry
-     *
      * @return string
      */
     public function getInfoAddressCountry()
@@ -652,22 +490,14 @@ class Place
     }
 
     /**
-     * Set infoUrl
-     *
-     * @param string $infoUrl
-     *
-     * @return Place
+     * @param string $infoAddressCountry
      */
-    public function setInfoUrl($infoUrl)
+    public function setInfoAddressCountry($infoAddressCountry)
     {
-        $this->infoUrl = $infoUrl;
-
-        return $this;
+        $this->infoAddressCountry = $infoAddressCountry;
     }
 
     /**
-     * Get infoUrl
-     *
      * @return string
      */
     public function getInfoUrl()
@@ -676,22 +506,14 @@ class Place
     }
 
     /**
-     * Set infoTel
-     *
-     * @param string $infoTel
-     *
-     * @return Place
+     * @param string $infoUrl
      */
-    public function setInfoTel($infoTel)
+    public function setInfoUrl($infoUrl)
     {
-        $this->infoTel = $infoTel;
-
-        return $this;
+        $this->infoUrl = $infoUrl;
     }
 
     /**
-     * Get infoTel
-     *
      * @return string
      */
     public function getInfoTel()
@@ -700,22 +522,14 @@ class Place
     }
 
     /**
-     * Set infoHistory
-     *
-     * @param string $infoHistory
-     *
-     * @return Place
+     * @param string $infoTel
      */
-    public function setInfoHistory($infoHistory)
+    public function setInfoTel($infoTel)
     {
-        $this->infoHistory = $infoHistory;
-
-        return $this;
+        $this->infoTel = $infoTel;
     }
 
     /**
-     * Get infoHistory
-     *
      * @return string
      */
     public function getInfoHistory()
@@ -724,22 +538,14 @@ class Place
     }
 
     /**
-     * Set scheduleNotes
-     *
-     * @param string $scheduleNotes
-     *
-     * @return Place
+     * @param string $infoHistory
      */
-    public function setScheduleNotes($scheduleNotes)
+    public function setInfoHistory($infoHistory)
     {
-        $this->scheduleNotes = $scheduleNotes;
-
-        return $this;
+        $this->infoHistory = $infoHistory;
     }
 
     /**
-     * Get scheduleNotes
-     *
      * @return string
      */
     public function getScheduleNotes()
@@ -748,22 +554,14 @@ class Place
     }
 
     /**
-     * Set scheduleEucharist
-     *
-     * @param string $scheduleEucharist
-     *
-     * @return Place
+     * @param string $scheduleNotes
      */
-    public function setScheduleEucharist($scheduleEucharist)
+    public function setScheduleNotes($scheduleNotes)
     {
-        $this->scheduleEucharist = $scheduleEucharist;
-
-        return $this;
+        $this->scheduleNotes = $scheduleNotes;
     }
 
     /**
-     * Get scheduleEucharist
-     *
      * @return string
      */
     public function getScheduleEucharist()
@@ -772,46 +570,14 @@ class Place
     }
 
     /**
-     * Set ancienId
-     *
-     * @param integer $ancienId
-     *
-     * @return Place
+     * @param string $scheduleEucharist
      */
-    public function setAncienId($ancienId)
+    public function setScheduleEucharist($scheduleEucharist)
     {
-        $this->ancienId = $ancienId;
-
-        return $this;
+        $this->scheduleEucharist = $scheduleEucharist;
     }
 
     /**
-     * Get ancienId
-     *
-     * @return integer
-     */
-    public function getAncienId()
-    {
-        return $this->ancienId;
-    }
-
-    /**
-     * Set modified
-     *
-     * @param \DateTime $modified
-     *
-     * @return Place
-     */
-    public function setModified($modified)
-    {
-        $this->modified = $modified;
-
-        return $this;
-    }
-
-    /**
-     * Get modified
-     *
      * @return \DateTime
      */
     public function getModified()
@@ -820,22 +586,14 @@ class Place
     }
 
     /**
-     * Set importSource
-     *
-     * @param string $importSource
-     *
-     * @return Place
+     * @param \DateTime $modified
      */
-    public function setImportSource($importSource)
+    public function setModified($modified)
     {
-        $this->importSource = $importSource;
-
-        return $this;
+        $this->modified = $modified;
     }
 
     /**
-     * Get importSource
-     *
      * @return string
      */
     public function getImportSource()
@@ -844,22 +602,14 @@ class Place
     }
 
     /**
-     * Set importId
-     *
-     * @param string $importId
-     *
-     * @return Place
+     * @param string $importSource
      */
-    public function setImportId($importId)
+    public function setImportSource($importSource)
     {
-        $this->importId = $importId;
-
-        return $this;
+        $this->importSource = $importSource;
     }
 
     /**
-     * Get importId
-     *
      * @return string
      */
     public function getImportId()
@@ -868,22 +618,14 @@ class Place
     }
 
     /**
-     * Set importModified
-     *
-     * @param \DateTime $importModified
-     *
-     * @return Place
+     * @param string $importId
      */
-    public function setImportModified($importModified)
+    public function setImportId($importId)
     {
-        $this->importModified = $importModified;
-
-        return $this;
+        $this->importId = $importId;
     }
 
     /**
-     * Get importModified
-     *
      * @return \DateTime
      */
     public function getImportModified()
@@ -892,23 +634,15 @@ class Place
     }
 
     /**
-     * Set numComments
-     *
-     * @param integer $numComments
-     *
-     * @return Place
+     * @param \DateTime $importModified
      */
-    public function setNumComments($numComments)
+    public function setImportModified($importModified)
     {
-        $this->numComments = $numComments;
-
-        return $this;
+        $this->importModified = $importModified;
     }
 
     /**
-     * Get numComments
-     *
-     * @return integer
+     * @return int
      */
     public function getNumComments()
     {
@@ -916,23 +650,15 @@ class Place
     }
 
     /**
-     * Set numLikes
-     *
-     * @param integer $numLikes
-     *
-     * @return Place
+     * @param int $numComments
      */
-    public function setNumLikes($numLikes)
+    public function setNumComments($numComments)
     {
-        $this->numLikes = $numLikes;
-
-        return $this;
+        $this->numComments = $numComments;
     }
 
     /**
-     * Get numLikes
-     *
-     * @return integer
+     * @return int
      */
     public function getNumLikes()
     {
@@ -940,26 +666,28 @@ class Place
     }
 
     /**
-     * Set numCheckins
-     *
-     * @param integer $numCheckins
-     *
-     * @return Place
+     * @param int $numLikes
      */
-    public function setNumCheckins($numCheckins)
+    public function setNumLikes($numLikes)
     {
-        $this->numCheckins = $numCheckins;
-
-        return $this;
+        $this->numLikes = $numLikes;
     }
 
     /**
-     * Get numCheckins
-     *
-     * @return integer
+     * @return int
      */
     public function getNumCheckins()
     {
         return $this->numCheckins;
     }
+
+    /**
+     * @param int $numCheckins
+     */
+    public function setNumCheckins($numCheckins)
+    {
+        $this->numCheckins = $numCheckins;
+    }
+
+
 }
