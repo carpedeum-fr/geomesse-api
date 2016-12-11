@@ -1,11 +1,21 @@
-<table class="table">
-    {% for place in places %}
-        <tr>
-            <td>{{ place.id }}</td>
-            <td>{{ place.name }}</td>
-            <td>{{ place.zipcode }}</td>
-            <td>{{ place.city }}</td>
-            <td>{{ place.country }}</td>
-        </tr>
-    {% endfor %}
-</table>
+{% extends 'CarpeDeumBundle::admin.html.twig' %}
+
+{% block title %}Places{% endblock %}
+
+{% block body %}
+    {{ pagerfanta(places, 'twitter_bootstrap3_translated') }}
+
+    <table class="table">
+        {% for place in places %}
+            <tr>
+                <td><a href="{{ path('place_show', {id: place.id}) }}">{{ place.id }}</a></td>
+                <td>{{ place.name|raw }}</td>
+                <td>{{ place.zipcode }}</td>
+                <td>{{ place.city }}</td>
+                <td>{{ place.country }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {{ pagerfanta(places, 'twitter_bootstrap3_translated') }}
+{% endblock %}

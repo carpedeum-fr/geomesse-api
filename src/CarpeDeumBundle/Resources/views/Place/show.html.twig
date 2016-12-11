@@ -1,0 +1,50 @@
+{% extends 'CarpeDeumBundle::admin.html.twig' %}
+
+{% block title %}{{ place.name }} details{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6">
+            <h1>{{ place.name }}</h1>
+            <ul>
+                <li>{{ place.address }}</li>
+                <li>{{ place.telephone }}</li>
+                <li>{{ place.url }}</li>
+            </ul>
+            <p>Histoire : {{ place.history }}</p>
+            <p>Notes : {{ place.notes }}</p>
+            <p>Messes : {{ place.eucharist }}</p>
+        </div>
+        <div class="col-md-6">
+            <img src="//mediaauto.carpedeum.fr/300x300{{ place.pic }}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table">
+                <th>
+                    <td colspan="2">Messes de semaine</td>
+                </th>
+                {% for time in place.timetable if time.dayOfWeek < 6 %}
+                    <tr>
+                        <td>{{ constant('DAYS_OF_WEEK', time)[time.dayOfWeek] }}</td>
+                        <td>{{ time.time|date('H:i') }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table class="table">
+                <th>
+                    <td colspan="2">Week-end</td>
+                </th>
+                {% for time in place.timetable if time.dayOfWeek > 5 %}
+                    <tr>
+                        <td>{{ constant('DAYS_OF_WEEK', time)[time.dayOfWeek] }}</td>
+                        <td>{{ time.time|date('H:i') }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
