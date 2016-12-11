@@ -88,21 +88,21 @@ class Place implements GeolocalizableInterface, ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="info_address", type="text")
+     * @ORM\Column(name="address", type="text")
      */
     private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="info_address_1", type="text")
+     * @ORM\Column(name="address_1", type="text")
      */
     private $address1;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="info_address_2", type="text")
+     * @ORM\Column(name="address_2", type="text")
      */
     private $address2;
 
@@ -151,14 +151,14 @@ class Place implements GeolocalizableInterface, ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="schedule_notes", type="text")
+     * @ORM\Column(name="notes", type="text")
      */
     private $notes;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="schedule_eucharist", type="text")
+     * @ORM\Column(name="eucharist", type="text")
      */
     private $eucharist;
 
