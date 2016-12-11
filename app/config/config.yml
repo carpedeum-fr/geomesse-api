@@ -72,6 +72,10 @@ doctrine_migrations:
     namespace: Application\Migrations
     table_name: migration_versions
 
+fos_rest:
+    routing_loader:
+        default_format: json
+
 sylius_resource:
     resources:
         cd.place:
