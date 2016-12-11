@@ -2,19 +2,22 @@
 
 namespace CarpeDeumBundle\Entity;
 
+use CarpeDeumBundle\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Place
  *
  * @ORM\Table(name="place", indexes={
- *     @ORM\Index(name="GEO_LAT", columns={"GEO_LAT", "GEO_LNG"}),
- *     @ORM\Index(name="IMPORT_SOURCE", columns={"IMPORT_SOURCE", "IMPORT_ID"})
+ *     @ORM\Index(name="geo_lat", columns={"geo_lat", "geo_lng"})
  * })
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Place
 {
+    use TimestampableTrait;
+
     /**
      * @var int
      *
@@ -175,55 +178,6 @@ class Place
      * @ORM\Column(name="schedule_eucharist", type="text")
      */
     private $scheduleEucharist;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="modified", type="datetime", nullable=true)
-     */
-    private $modified;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="import_source", type="string", length=100)
-     */
-    private $importSource;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="import_id", type="string", length=100)
-     */
-    private $importId;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="import_modified", type="datetime", nullable=true)
-     */
-    private $importModified;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nb_comments", type="bigint", options={"unsigned"=true})
-     */
-    private $numComments;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nb_likes", type="bigint", options={"unsigned"=true})
-     */
-    private $numLikes;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nb_checkins", type="bigint", options={"unsigned"=true})
-     */
-    private $numCheckins;
 
     /**
      * @return int
@@ -576,118 +530,4 @@ class Place
     {
         $this->scheduleEucharist = $scheduleEucharist;
     }
-
-    /**
-     * @return \DateTime
-     */
-    public function getModified()
-    {
-        return $this->modified;
-    }
-
-    /**
-     * @param \DateTime $modified
-     */
-    public function setModified($modified)
-    {
-        $this->modified = $modified;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImportSource()
-    {
-        return $this->importSource;
-    }
-
-    /**
-     * @param string $importSource
-     */
-    public function setImportSource($importSource)
-    {
-        $this->importSource = $importSource;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImportId()
-    {
-        return $this->importId;
-    }
-
-    /**
-     * @param string $importId
-     */
-    public function setImportId($importId)
-    {
-        $this->importId = $importId;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getImportModified()
-    {
-        return $this->importModified;
-    }
-
-    /**
-     * @param \DateTime $importModified
-     */
-    public function setImportModified($importModified)
-    {
-        $this->importModified = $importModified;
-    }
-
-    /**
-     * @return int
-     */
-    public function getNumComments()
-    {
-        return $this->numComments;
-    }
-
-    /**
-     * @param int $numComments
-     */
-    public function setNumComments($numComments)
-    {
-        $this->numComments = $numComments;
-    }
-
-    /**
-     * @return int
-     */
-    public function getNumLikes()
-    {
-        return $this->numLikes;
-    }
-
-    /**
-     * @param int $numLikes
-     */
-    public function setNumLikes($numLikes)
-    {
-        $this->numLikes = $numLikes;
-    }
-
-    /**
-     * @return int
-     */
-    public function getNumCheckins()
-    {
-        return $this->numCheckins;
-    }
-
-    /**
-     * @param int $numCheckins
-     */
-    public function setNumCheckins($numCheckins)
-    {
-        $this->numCheckins = $numCheckins;
-    }
-
-
 }
