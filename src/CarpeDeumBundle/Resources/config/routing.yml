@@ -1,4 +1,4 @@
 carpe_deum_place:
     resource: "@CarpeDeumBundle/Resources/config/routing/place.yml"
     prefix: /place
-    type: rest
+    #type: rest
