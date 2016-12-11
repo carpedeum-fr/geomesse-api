@@ -4,6 +4,7 @@ namespace CarpeDeumBundle\Entity;
 
 use CarpeDeumBundle\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * Time
@@ -12,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
  */
-class Time
+class Time implements ResourceInterface
 {
     use TimestampableTrait;
 

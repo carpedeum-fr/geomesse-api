@@ -5,6 +5,7 @@
 /var/logs/*
 !var/logs/.gitkeep
 /var/phpunit.xml
+/var/sessions/*
 /bin/symfony_requirements
 /vendor/
 /web/bundles/

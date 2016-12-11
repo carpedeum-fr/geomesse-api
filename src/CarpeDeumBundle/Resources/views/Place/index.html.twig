@@ -1,0 +1,11 @@
+<table class="table">
+    {% for place in places %}
+        <tr>
+            <td>{{ place.id }}</td>
+            <td>{{ place.name }}</td>
+            <td>{{ place.zipcode }}</td>
+            <td>{{ place.city }}</td>
+            <td>{{ place.country }}</td>
+        </tr>
+    {% endfor %}
+</table>
