@@ -9,3 +9,4 @@
 /bin/symfony_requirements
 /vendor/
 /web/bundles/
+/web/vendor/
