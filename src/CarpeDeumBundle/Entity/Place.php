@@ -3,20 +3,20 @@
 namespace CarpeDeumBundle\Entity;
 
 use CarpeDeumBundle\Entity\Traits\TimestampableTrait;
+use CarpeDeumBundle\Entity\Traits\GeolocalizableTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Place
  *
- * @ORM\Table(name="place", indexes={
- *     @ORM\Index(name="geo_lat", columns={"geo_lat", "geo_lng"})
- * })
+ * @ORM\Table(name="place")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
  */
-class Place
+class Place implements GeolocalizableInterface
 {
     use TimestampableTrait;
+    use GeolocalizableTrait;
 
     /**
      * @var int
@@ -82,20 +82,6 @@ class Place
      * @ORM\Column(name="vids_list", type="text")
      */
     private $vidsList;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="geo_lat", type="float", precision=10, scale=0)
-     */
-    private $geoLat = '0';
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="geo_lng", type="float", precision=10, scale=0)
-     */
-    private $geoLng = '0';
 
     /**
      * @var string
