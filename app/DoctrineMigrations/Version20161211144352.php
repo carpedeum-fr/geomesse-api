@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Auto-generated Migration: Please modify to your needs!
+ * Try to fix problem with dates
  */
 class Version20161211144352 extends AbstractMigration
 {
@@ -15,7 +15,6 @@ class Version20161211144352 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE place CHANGE created_at created_at DATETIME  NULL, CHANGE updated_at updated_at DATETIME  NULL');
@@ -29,7 +28,6 @@ class Version20161211144352 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE place CHANGE address info_address TEXT NOT NULL COLLATE latin1_swedish_ci, CHANGE address_1 info_address_1 TEXT NOT NULL COLLATE latin1_swedish_ci, CHANGE address_2 info_address_2 TEXT NOT NULL COLLATE latin1_swedish_ci, CHANGE notes schedule_notes TEXT NOT NULL COLLATE latin1_swedish_ci, CHANGE eucharist schedule_eucharist TEXT NOT NULL COLLATE latin1_swedish_ci');
