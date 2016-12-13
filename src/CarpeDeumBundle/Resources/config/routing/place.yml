@@ -1,0 +1,14 @@
+place_index:
+    path: /
+    defaults:
+        _controller: cd.controller.place:indexAction
+        _sylius:
+            template: 'CarpeDeumBundle:Place:index.html.twig'
+            paginate: 50
+
+place_show:
+    path: /{id}
+    defaults:
+        _controller: cd.controller.place:showAction
+        _sylius:
+            template: 'CarpeDeumBundle:Place:show.html.twig'

@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Auto-generated Migration: Please modify to your needs!
+ * Small caps, index and cleanup
  */
 class Version20161206155852 extends AbstractMigration
 {
@@ -15,7 +15,6 @@ class Version20161206155852 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql("SET sql_mode=(SELECT REPLACE(@@sql_mode,'NO_ZERO_DATE',''))");
@@ -32,7 +31,6 @@ class Version20161206155852 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE place ADD ancien_type VARCHAR(100) DEFAULT \'\' NOT NULL COLLATE latin1_swedish_ci, ADD INFO_ADDRESS_ZIP TEXT NOT NULL COLLATE latin1_swedish_ci, ADD INFO_ADDRESS_CITY TEXT NOT NULL COLLATE latin1_swedish_ci, ADD INFO_ADDRESS_COUNTRY TEXT NOT NULL COLLATE latin1_swedish_ci, ADD INFO_URL TEXT NOT NULL COLLATE latin1_swedish_ci, ADD INFO_TEL TEXT NOT NULL COLLATE latin1_swedish_ci, ADD INFO_HISTORY TEXT NOT NULL COLLATE latin1_swedish_ci, ADD ancien_id BIGINT UNSIGNED DEFAULT 0 NOT NULL, ADD NUM_COMMENTS BIGINT UNSIGNED DEFAULT 0 NOT NULL, ADD NUM_LIKES BIGINT UNSIGNED DEFAULT 0 NOT NULL, ADD NUM_CHECKINS BIGINT UNSIGNED DEFAULT 0 NOT NULL, DROP zip_code, DROP city, DROP country, DROP url, DROP telephone, DROP history, DROP nb_comments, DROP nb_likes, DROP nb_checkins, CHANGE name NAME VARCHAR(100) DEFAULT \'\' NOT NULL COLLATE latin1_swedish_ci, CHANGE type TYPE VARCHAR(255) DEFAULT \'CHURCH\' NOT NULL COLLATE latin1_swedish_ci, CHANGE pic PIC VARCHAR(200) DEFAULT \'\' NOT NULL COLLATE latin1_swedish_ci, CHANGE geo_lat GEO_LAT DOUBLE PRECISION DEFAULT \'0\' NOT NULL, CHANGE geo_lng GEO_LNG DOUBLE PRECISION DEFAULT \'0\' NOT NULL, CHANGE modified MODIFIED DATETIME DEFAULT CURRENT_TIMESTAMP NULL, CHANGE import_source IMPORT_SOURCE VARCHAR(100) DEFAULT \'\' NOT NULL COLLATE utf8_general_ci, CHANGE import_id IMPORT_ID VARCHAR(100) DEFAULT \'\' NOT NULL COLLATE utf8_general_ci, CHANGE import_modified IMPORT_MODIFIED DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL');

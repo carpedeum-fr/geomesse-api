@@ -2,19 +2,24 @@
 
 namespace CarpeDeumBundle\Entity;
 
+use CarpeDeumBundle\Entity\Traits\TimestampableTrait;
+use CarpeDeumBundle\Entity\Traits\GeolocalizableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * Place
  *
- * @ORM\Table(name="place", indexes={
- *     @ORM\Index(name="GEO_LAT", columns={"GEO_LAT", "GEO_LNG"}),
- *     @ORM\Index(name="IMPORT_SOURCE", columns={"IMPORT_SOURCE", "IMPORT_ID"})
- * })
+ * @ORM\Table(name="place")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
-class Place
+class Place implements GeolocalizableInterface, ResourceInterface
 {
+    use TimestampableTrait;
+    use GeolocalizableTrait;
+
     /**
      * @var int
      *
@@ -81,149 +86,93 @@ class Place
     private $vidsList;
 
     /**
-     * @var float
+     * @var string
      *
-     * @ORM\Column(name="geo_lat", type="float", precision=10, scale=0)
+     * @ORM\Column(name="address", type="text")
      */
-    private $geoLat = '0';
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="geo_lng", type="float", precision=10, scale=0)
-     */
-    private $geoLng = '0';
+    private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="info_address", type="text")
+     * @ORM\Column(name="address_1", type="text")
      */
-    private $infoAddress;
+    private $address1;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="info_address_1", type="text")
+     * @ORM\Column(name="address_2", type="text")
      */
-    private $infoAddress1;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="info_address_2", type="text")
-     */
-    private $infoAddress2;
+    private $address2;
 
     /**
      * @var string
      *
      * @ORM\Column(name="zip_code", type="text")
      */
-    private $infoAddressZip;
+    private $zipCode;
 
     /**
      * @var string
      *
      * @ORM\Column(name="city", type="text")
      */
-    private $infoAddressCity;
+    private $city;
 
     /**
      * @var string
      *
      * @ORM\Column(name="country", type="text")
      */
-    private $infoAddressCountry;
+    private $country;
 
     /**
      * @var string
      *
      * @ORM\Column(name="url", type="text")
      */
-    private $infoUrl;
+    private $url;
 
     /**
      * @var string
      *
      * @ORM\Column(name="telephone", type="text")
      */
-    private $infoTel;
+    private $telephone;
 
     /**
      * @var string
      *
      * @ORM\Column(name="history", type="text")
      */
-    private $infoHistory;
+    private $history;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="notes", type="text")
+     */
+    private $notes;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="eucharist", type="text")
+     */
+    private $eucharist;
+
+    /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="\CarpeDeumBundle\Entity\Time", mappedBy="place")
      */
     private $timetable;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="schedule_notes", type="text")
-     */
-    private $scheduleNotes;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="schedule_eucharist", type="text")
-     */
-    private $scheduleEucharist;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="modified", type="datetime", nullable=true)
-     */
-    private $modified;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="import_source", type="string", length=100)
-     */
-    private $importSource;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="import_id", type="string", length=100)
-     */
-    private $importId;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="import_modified", type="datetime", nullable=true)
-     */
-    private $importModified;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nb_comments", type="bigint", options={"unsigned"=true})
-     */
-    private $numComments;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nb_likes", type="bigint", options={"unsigned"=true})
-     */
-    private $numLikes;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nb_checkins", type="bigint", options={"unsigned"=true})
-     */
-    private $numCheckins;
+    public function __construct()
+    {
+        $this->timetable = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -370,324 +319,204 @@ class Place
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getGeoLat()
+    public function getAddress()
     {
-        return $this->geoLat;
+        return $this->address;
     }
 
     /**
-     * @param float $geoLat
+     * @param string $address
      */
-    public function setGeoLat($geoLat)
+    public function setAddress($address)
     {
-        $this->geoLat = $geoLat;
-    }
-
-    /**
-     * @return float
-     */
-    public function getGeoLng()
-    {
-        return $this->geoLng;
-    }
-
-    /**
-     * @param float $geoLng
-     */
-    public function setGeoLng($geoLng)
-    {
-        $this->geoLng = $geoLng;
+        $this->address = $address;
     }
 
     /**
      * @return string
      */
-    public function getInfoAddress()
+    public function getAddress1()
     {
-        return $this->infoAddress;
+        return $this->address1;
     }
 
     /**
-     * @param string $infoAddress
+     * @param string $address1
      */
-    public function setInfoAddress($infoAddress)
+    public function setAddress1($address1)
     {
-        $this->infoAddress = $infoAddress;
-    }
-
-    /**
-     * @return string
-     */
-    public function getInfoAddress1()
-    {
-        return $this->infoAddress1;
-    }
-
-    /**
-     * @param string $infoAddress1
-     */
-    public function setInfoAddress1($infoAddress1)
-    {
-        $this->infoAddress1 = $infoAddress1;
+        $this->address1 = $address1;
     }
 
     /**
      * @return string
      */
-    public function getInfoAddress2()
+    public function getAddress2()
     {
-        return $this->infoAddress2;
+        return $this->address2;
     }
 
     /**
-     * @param string $infoAddress2
+     * @param string $address2
      */
-    public function setInfoAddress2($infoAddress2)
+    public function setAddress2($address2)
     {
-        $this->infoAddress2 = $infoAddress2;
-    }
-
-    /**
-     * @return string
-     */
-    public function getInfoAddressZip()
-    {
-        return $this->infoAddressZip;
-    }
-
-    /**
-     * @param string $infoAddressZip
-     */
-    public function setInfoAddressZip($infoAddressZip)
-    {
-        $this->infoAddressZip = $infoAddressZip;
+        $this->address2 = $address2;
     }
 
     /**
      * @return string
      */
-    public function getInfoAddressCity()
+    public function getZipCode()
     {
-        return $this->infoAddressCity;
+        return $this->zipCode;
     }
 
     /**
-     * @param string $infoAddressCity
+     * @param string $zipCode
      */
-    public function setInfoAddressCity($infoAddressCity)
+    public function setZipCode($zipCode)
     {
-        $this->infoAddressCity = $infoAddressCity;
-    }
-
-    /**
-     * @return string
-     */
-    public function getInfoAddressCountry()
-    {
-        return $this->infoAddressCountry;
-    }
-
-    /**
-     * @param string $infoAddressCountry
-     */
-    public function setInfoAddressCountry($infoAddressCountry)
-    {
-        $this->infoAddressCountry = $infoAddressCountry;
+        $this->zipCode = $zipCode;
     }
 
     /**
      * @return string
      */
-    public function getInfoUrl()
+    public function getCity()
     {
-        return $this->infoUrl;
+        return $this->city;
     }
 
     /**
-     * @param string $infoUrl
+     * @param string $city
      */
-    public function setInfoUrl($infoUrl)
+    public function setCity($city)
     {
-        $this->infoUrl = $infoUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getInfoTel()
-    {
-        return $this->infoTel;
-    }
-
-    /**
-     * @param string $infoTel
-     */
-    public function setInfoTel($infoTel)
-    {
-        $this->infoTel = $infoTel;
+        $this->city = $city;
     }
 
     /**
      * @return string
      */
-    public function getInfoHistory()
+    public function getCountry()
     {
-        return $this->infoHistory;
+        return $this->country;
     }
 
     /**
-     * @param string $infoHistory
+     * @param string $country
      */
-    public function setInfoHistory($infoHistory)
+    public function setCountry($country)
     {
-        $this->infoHistory = $infoHistory;
-    }
-
-    /**
-     * @return string
-     */
-    public function getScheduleNotes()
-    {
-        return $this->scheduleNotes;
-    }
-
-    /**
-     * @param string $scheduleNotes
-     */
-    public function setScheduleNotes($scheduleNotes)
-    {
-        $this->scheduleNotes = $scheduleNotes;
+        $this->country = $country;
     }
 
     /**
      * @return string
      */
-    public function getScheduleEucharist()
+    public function getUrl()
     {
-        return $this->scheduleEucharist;
+        return $this->url;
     }
 
     /**
-     * @param string $scheduleEucharist
+     * @param string $url
      */
-    public function setScheduleEucharist($scheduleEucharist)
+    public function setUrl($url)
     {
-        $this->scheduleEucharist = $scheduleEucharist;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getModified()
-    {
-        return $this->modified;
-    }
-
-    /**
-     * @param \DateTime $modified
-     */
-    public function setModified($modified)
-    {
-        $this->modified = $modified;
+        $this->url = $url;
     }
 
     /**
      * @return string
      */
-    public function getImportSource()
+    public function getTelephone()
     {
-        return $this->importSource;
+        return $this->telephone;
     }
 
     /**
-     * @param string $importSource
+     * @param string $telephone
      */
-    public function setImportSource($importSource)
+    public function setTelephone($telephone)
     {
-        $this->importSource = $importSource;
+        $this->telephone = $telephone;
     }
 
     /**
      * @return string
      */
-    public function getImportId()
+    public function getHistory()
     {
-        return $this->importId;
+        return $this->history;
     }
 
     /**
-     * @param string $importId
+     * @param string $history
      */
-    public function setImportId($importId)
+    public function setHistory($history)
     {
-        $this->importId = $importId;
+        $this->history = $history;
     }
 
     /**
-     * @return \DateTime
+     * @return string
      */
-    public function getImportModified()
+    public function getNotes()
     {
-        return $this->importModified;
+        return $this->notes;
     }
 
     /**
-     * @param \DateTime $importModified
+     * @param string $notes
      */
-    public function setImportModified($importModified)
+    public function setNotes($notes)
     {
-        $this->importModified = $importModified;
+        $this->notes = $notes;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getNumComments()
+    public function getEucharist()
     {
-        return $this->numComments;
+        return $this->eucharist;
     }
 
     /**
-     * @param int $numComments
+     * @param string $eucharist
      */
-    public function setNumComments($numComments)
+    public function setEucharist($eucharist)
     {
-        $this->numComments = $numComments;
+        $this->eucharist = $eucharist;
     }
 
     /**
-     * @return int
+     * @return ArrayCollection
      */
-    public function getNumLikes()
+    public function getTimetable()
     {
-        return $this->numLikes;
+        return $this->timetable;
     }
 
     /**
-     * @param int $numLikes
+     * @param Time $time
      */
-    public function setNumLikes($numLikes)
+    public function addTimetable(Time $time)
     {
-        $this->numLikes = $numLikes;
+        $this->timetable[] = $time;
+
+        return $this;
     }
 
     /**
-     * @return int
+     * @param Time $time
      */
-    public function getNumCheckins()
+    public function removeFolder(Time $time)
     {
-        return $this->numCheckins;
+        $this->timetable->removeElement($time);
     }
-
-    /**
-     * @param int $numCheckins
-     */
-    public function setNumCheckins($numCheckins)
-    {
-        $this->numCheckins = $numCheckins;
-    }
-
-
 }

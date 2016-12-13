@@ -2,16 +2,21 @@
 
 namespace CarpeDeumBundle\Entity;
 
+use CarpeDeumBundle\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * Time
  *
  * @ORM\Table(name="time")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
-class Time
+class Time implements ResourceInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var int
      *
@@ -27,16 +32,9 @@ class Time
     private $place;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="kind", type="string", nullable=false)
-     */
-    private $kind = 'WEEKDAY';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="day_of_week", type="string", nullable=false)
+     * @ORM\Column(name="day_of_week", type="integer", nullable=false)
      */
     private $dayOfWeek;
 
@@ -73,33 +71,17 @@ class Time
     /**
      * @return int
      */
-    public function getPlaceId()
+    public function getPlace()
     {
-        return $this->placeId;
+        return $this->place;
     }
 
     /**
-     * @param int $placeId
+     * @param Place $place
      */
-    public function setPlaceId($placeId)
+    public function setPlace(Place $place)
     {
-        $this->placeId = $placeId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getKind()
-    {
-        return $this->kind;
-    }
-
-    /**
-     * @param string $kind
-     */
-    public function setKind($kind)
-    {
-        $this->kind = $kind;
+        $this->place = $place;
     }
 
     /**

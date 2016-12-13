@@ -24,7 +24,6 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
 
-            new AppBundle\AppBundle(),
             new CarpeDeumBundle\CarpeDeumBundle(),
         ];
 
