@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Auto-generated Migration: Please modify to your needs!
+ * Setup MySQL geo data
  */
 class Version20161211121128 extends AbstractMigration
 {
@@ -15,7 +15,6 @@ class Version20161211121128 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('DROP INDEX GEO_LAT ON place');
@@ -30,7 +29,6 @@ class Version20161211121128 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE place ADD geo_lat DOUBLE PRECISION NOT NULL, ADD geo_lng DOUBLE PRECISION NOT NULL, DROP longitude, DROP latitude, DROP geo_point');

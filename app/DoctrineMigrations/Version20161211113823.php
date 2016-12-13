@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Auto-generated Migration: Please modify to your needs!
+ * Add createdAt/updatedAt and cleanup
  */
 class Version20161211113823 extends AbstractMigration
 {
@@ -28,7 +28,6 @@ class Version20161211113823 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('DROP INDEX IMPORT_SOURCE ON place');
@@ -42,7 +41,6 @@ class Version20161211113823 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE place ADD modified DATETIME NOT NULL, ADD import_source VARCHAR(100) NOT NULL COLLATE utf8_general_ci, ADD import_id VARCHAR(100) NOT NULL COLLATE utf8_general_ci, ADD import_modified DATETIME DEFAULT NULL, ADD nb_comments BIGINT UNSIGNED NOT NULL, ADD nb_likes BIGINT UNSIGNED NOT NULL, ADD nb_checkins BIGINT UNSIGNED NOT NULL, DROP created_at, DROP updated_at');

@@ -44,7 +44,13 @@ trait GeolocalizableTrait
     public function calculateDistance(GeolocalizableInterface $geolocalizable)
     {
         // We approximate that Earth is flat, sorry Galileo!
-        return round(sqrt(pow($geolocalizable->getLatitude() - $this->getLatitude(), 2) + pow($geolocalizable->getLongitude() - $this->getLongitude(), 2)) * 111, 1);
+        return round(
+            sqrt(
+                pow($geolocalizable->getLatitude() - $this->getLatitude(), 2) +
+                pow($geolocalizable->getLongitude() - $this->getLongitude(), 2)
+            ) * 111,
+            1
+        );
     }
 
     /**
