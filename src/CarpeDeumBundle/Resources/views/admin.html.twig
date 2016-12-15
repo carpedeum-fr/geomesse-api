@@ -4,9 +4,7 @@
     <title>{% block title %}{% endblock %} - GeoMesse</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     {% block stylesheets %}
-        <link href="{{ asset('vendor/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet"/>
-        <link href="{{ asset('vendor/css/select2.min.css') }}" type="text/css" rel="stylesheet"/>
-        <link href="{{ asset('vendor/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet"/>
+        <link href="{{ asset('vendor/css/vendor.min.css') }}" type="text/css" rel="stylesheet"/>
         <link href="{{ asset('bundles/syliusresource/css/form-collection.css') }}" type="text/css" rel="stylesheet"/>
     {% endblock %}
 </head>
@@ -44,9 +42,7 @@
 
 
 {% block javascripts %}
-    <script type="text/javascript" src="{{ asset('vendor/js/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendor/js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendor/js/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/js/vendor.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/syliusresource/js/form-collection.js') }}"></script>
 {% endblock %}
 </body>
