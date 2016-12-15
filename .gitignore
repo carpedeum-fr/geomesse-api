@@ -1,3 +1,4 @@
+/node_modules/
 /var/bootstrap.php.cache
 /var/cache/*
 !var/cache/.gitkeep
