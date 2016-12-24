@@ -1,4 +1,4 @@
-place_index:
+api_place_index:
     path: /
     defaults:
         _controller: cd.controller.place:indexAction
@@ -6,7 +6,7 @@ place_index:
             template: 'CarpeDeumBundle:Place:index.html.twig'
             paginate: 50
 
-place_show:
+api_place_show:
     path: /{id}
     defaults:
         _controller: cd.controller.place:showAction

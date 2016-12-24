@@ -1,8 +1,3 @@
 carpe_deum_place:
     resource: "@CarpeDeumBundle/Resources/config/routing/place.yml"
     prefix: /place
-
-carpe_deum_api_place:
-    resource: "@CarpeDeumBundle/Resources/config/routing_api/place.yml"
-    prefix: /place
-    type: rest

@@ -1,3 +1,7 @@
 carpe_deum:
     resource: "@CarpeDeumBundle/Resources/config/routing.yml"
     prefix:   /
+
+carpe_deum_api:
+    resource: "@CarpeDeumBundle/Resources/config/routing_api.yml"
+    prefix:   /api/
