@@ -4,8 +4,127 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e351f2b8090531a49a29515f005eaf3",
+    "content-hash": "a0dd32840f78fb7462cb1f4a50166d3d",
     "packages": [
+        {
+            "name": "behat/mink",
+            "version": "v1.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/minkphp/Mink.git",
+                "reference": "e6930b9c74693dff7f4e58577e1b1743399f3ff9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/minkphp/Mink/zipball/e6930b9c74693dff7f4e58577e1b1743399f3ff9",
+                "reference": "e6930b9c74693dff7f4e58577e1b1743399f3ff9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1",
+                "symfony/css-selector": "~2.1|~3.0"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7|~3.0"
+            },
+            "suggest": {
+                "behat/mink-browserkit-driver": "extremely fast headless driver for Symfony\\Kernel-based apps (Sf2, Silex)",
+                "behat/mink-goutte-driver": "fast headless driver for any app without JS emulation",
+                "behat/mink-selenium2-driver": "slow, but JS-enabled driver for any app (requires Selenium2)",
+                "behat/mink-zombie-driver": "fast and JS-enabled headless driver for any app (requires node.js)"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Behat\\Mink\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Browser controller/emulator abstraction for PHP",
+            "homepage": "http://mink.behat.org/",
+            "keywords": [
+                "browser",
+                "testing",
+                "web"
+            ],
+            "time": "2016-03-05T08:26:18+00:00"
+        },
+        {
+            "name": "behat/mink-selenium2-driver",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/minkphp/MinkSelenium2Driver.git",
+                "reference": "473a9f3ebe0c134ee1e623ce8a9c852832020288"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/minkphp/MinkSelenium2Driver/zipball/473a9f3ebe0c134ee1e623ce8a9c852832020288",
+                "reference": "473a9f3ebe0c134ee1e623ce8a9c852832020288",
+                "shasum": ""
+            },
+            "require": {
+                "behat/mink": "~1.7@dev",
+                "instaclick/php-webdriver": "~1.1",
+                "php": ">=5.3.1"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "mink-driver",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Behat\\Mink\\Driver\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                },
+                {
+                    "name": "Pete Otaqui",
+                    "email": "pete@otaqui.com",
+                    "homepage": "https://github.com/pete-otaqui"
+                }
+            ],
+            "description": "Selenium2 (WebDriver) driver for Mink framework",
+            "homepage": "http://mink.behat.org/",
+            "keywords": [
+                "ajax",
+                "browser",
+                "javascript",
+                "selenium",
+                "testing",
+                "webdriver"
+            ],
+            "time": "2016-03-05T09:10:18+00:00"
+        },
         {
             "name": "behat/transliterator",
             "version": "v1.1.0",
@@ -1165,6 +1284,64 @@
                 "parameters management"
             ],
             "time": "2015-11-10T17:04:01+00:00"
+        },
+        {
+            "name": "instaclick/php-webdriver",
+            "version": "1.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/instaclick/php-webdriver.git",
+                "reference": "0c20707dcf30a32728fd6bdeeab996c887fdb2fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/instaclick/php-webdriver/zipball/0c20707dcf30a32728fd6bdeeab996c887fdb2fb",
+                "reference": "0c20707dcf30a32728fd6bdeeab996c887fdb2fb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "WebDriver": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Bishop",
+                    "email": "jubishop@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Anthon Pang",
+                    "email": "apang@softwaredevelopment.ca",
+                    "role": "Fork Maintainer"
+                }
+            ],
+            "description": "PHP WebDriver for Selenium 2",
+            "homepage": "http://instaclick.com/",
+            "keywords": [
+                "browser",
+                "selenium",
+                "webdriver",
+                "webtest"
+            ],
+            "time": "2015-06-15T20:19:33+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -3593,64 +3770,6 @@
             "time": "2016-10-30T11:50:56+00:00"
         },
         {
-            "name": "behat/mink",
-            "version": "v1.7.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/minkphp/Mink.git",
-                "reference": "e6930b9c74693dff7f4e58577e1b1743399f3ff9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/minkphp/Mink/zipball/e6930b9c74693dff7f4e58577e1b1743399f3ff9",
-                "reference": "e6930b9c74693dff7f4e58577e1b1743399f3ff9",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.1",
-                "symfony/css-selector": "~2.1|~3.0"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "~2.7|~3.0"
-            },
-            "suggest": {
-                "behat/mink-browserkit-driver": "extremely fast headless driver for Symfony\\Kernel-based apps (Sf2, Silex)",
-                "behat/mink-goutte-driver": "fast headless driver for any app without JS emulation",
-                "behat/mink-selenium2-driver": "slow, but JS-enabled driver for any app (requires Selenium2)",
-                "behat/mink-zombie-driver": "fast and JS-enabled headless driver for any app (requires node.js)"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.7.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Behat\\Mink\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Konstantin Kudryashov",
-                    "email": "ever.zet@gmail.com",
-                    "homepage": "http://everzet.com"
-                }
-            ],
-            "description": "Browser controller/emulator abstraction for PHP",
-            "homepage": "http://mink.behat.org/",
-            "keywords": [
-                "browser",
-                "testing",
-                "web"
-            ],
-            "time": "2016-03-05T08:26:18+00:00"
-        },
-        {
             "name": "behat/mink-browserkit-driver",
             "version": "v1.3.2",
             "source": {
@@ -3824,122 +3943,6 @@
                 "symfony"
             ],
             "time": "2016-01-13T17:06:48+00:00"
-        },
-        {
-            "name": "bex/behat-extension-driver-locator",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tkotosz/behat-extension-driver-locator.git",
-                "reference": "af9fb11f5f3cc220ee2c08071ee9d50f11048b86"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tkotosz/behat-extension-driver-locator/zipball/af9fb11f5f3cc220ee2c08071ee9d50f11048b86",
-                "reference": "af9fb11f5f3cc220ee2c08071ee9d50f11048b86",
-                "shasum": ""
-            },
-            "require": {
-                "behat/behat": "^3.0.0",
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "2.4.0-alpha2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tibor Kotosz",
-                    "email": "kotosy@gmail.com",
-                    "homepage": "https://github.com/tkotosz",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Driver locator tool for behat extensions",
-            "homepage": "https://github.com/tkotosz/behat-extension-driver-locator",
-            "keywords": [
-                "BDD",
-                "Behat",
-                "TDD"
-            ],
-            "time": "2015-12-17T13:26:09+00:00"
-        },
-        {
-            "name": "bex/behat-screenshot",
-            "version": "1.2.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/elvetemedve/behat-screenshot.git",
-                "reference": "1e2f704a5dd26b679953d6aff9a1add7ec978f81"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/elvetemedve/behat-screenshot/zipball/1e2f704a5dd26b679953d6aff9a1add7ec978f81",
-                "reference": "1e2f704a5dd26b679953d6aff9a1add7ec978f81",
-                "shasum": ""
-            },
-            "require": {
-                "behat/behat": "^3.0.0",
-                "behat/mink-extension": "^2.0.0",
-                "bex/behat-extension-driver-locator": "^1.0.2",
-                "php": ">=5.4",
-                "symfony/filesystem": "^2.7|^3.0",
-                "symfony/finder": "^2.7|^3.0"
-            },
-            "require-dev": {
-                "behat/mink-selenium2-driver": "^1.3.0",
-                "bex/behat-screenshot-image-driver-dummy": "^1.0",
-                "bex/behat-test-runner": "^1.2.1",
-                "jakoch/phantomjs-installer": "^2.1.1-p07",
-                "phpspec/phpspec": "^2.5"
-            },
-            "suggest": {
-                "bex/behat-screenshot-image-driver-img42": "Allows to upload the screenshot to img42.com",
-                "bex/behat-screenshot-image-driver-unsee": "Allows to upload the screenshot to unsee.cc",
-                "bex/behat-screenshot-image-driver-uploadpie": "Allows to upload the screenshot to uploadpie.com"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Bex\\Behat\\ScreenshotExtension\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Geza Buza",
-                    "email": "bghome@gmail.com",
-                    "homepage": "https://twitter.com/medve540",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Tibor Kotosz",
-                    "email": "kotosy@gmail.com",
-                    "homepage": "https://github.com/tkotosz",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Extension for behat to help debug failing scenarios",
-            "homepage": "https://github.com/elvetemedve/behat-screenshot",
-            "keywords": [
-                "BDD",
-                "Behat",
-                "TDD",
-                "behat-screenshot"
-            ],
-            "time": "2016-11-26T16:45:39+00:00"
         },
         {
             "name": "fzaninotto/faker",
