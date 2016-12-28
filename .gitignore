@@ -1,12 +1,11 @@
-/var/bootstrap.php.cache
-/var/cache/*
+api/var/bootstrap.php.cache
+api/var/cache/*
 !var/cache/.gitkeep
-/app/config/parameters.yml
+api/app/config/parameters.yml
 /var/logs/*
 !var/logs/.gitkeep
-/var/phpunit.xml
+api/var/phpunit.xml
 /bin/
 api/vendor/
 api/web/bundles/
 docker-compose.dev.yml
-
