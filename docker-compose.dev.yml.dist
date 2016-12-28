@@ -1,0 +1,35 @@
+front:
+    image: nginx
+    ports:
+        - "8080:80"
+    links:
+        - "engine:engine"
+    volumes:
+        - ".:/home/docker:ro"
+        - "./docker/front/default.conf:/etc/nginx/conf.d/default.conf:ro"
+
+data:
+  image: busybox
+  volumes:
+    - /data
+
+db:
+  image: mysql:8.0.0
+  volumes_from:
+    - data
+  ports:
+    - "3306:3306"
+  environment:
+    - "MYSQL_ROOT_PASSWORD=admin"
+    - "MYSQL_USER=geomesse"
+    - "MYSQL_PASSWORD=geomesse"
+    - "MYSQL_DATABASE=carpedeum"
+
+engine:
+  build: ./docker/engine
+  volumes:
+    - "./api:/home/docker:rw"
+    - "./docker/engine/php.ini:/usr/local/etc/php/conf.d/custom.ini:ro"
+  working_dir: "/home/docker"
+  links:
+   - "db:db"

@@ -9,3 +9,4 @@
 /bin/symfony_requirements
 /vendor/
 /web/bundles/
+docker-compose.dev.yml

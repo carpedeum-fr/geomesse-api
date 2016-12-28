@@ -1,9 +1,11 @@
 parameters:
-    database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     carpedeum
+    database_host:     db
+    database_port:     3306
+    database_name:     geomesse
     database_user:     root
-    database_password: ~
+    database_password: geomesse
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
