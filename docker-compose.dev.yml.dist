@@ -1,3 +1,13 @@
+front:
+    image: nginx
+    ports:
+        - "8080:80"
+    links:
+        - "engine:engine"
+    volumes:
+        - ".:/home/docker:ro"
+        - "./docker/front/default.conf:/etc/nginx/conf.d/default.conf:ro"
+
 data:
   image: busybox
   volumes:
@@ -8,34 +18,18 @@ db:
   volumes_from:
     - data
   ports:
-    - "5432:5432"
-
-api:
-  image: whatwedo/symfony3:latest
-  volumes:
-    - ./api:/app
-  working_dir: /app
-  links:
-   - db
-  ports:
-    - "8000:8000"
+    - "3306:3306"
   environment:
-    HOST: "0.0.0.0"
-    PORT: "8000"
-    DB_DATABASE: mysql
-    DB_USERNAME: mysql
+    - "MYSQL_ROOT_PASSWORD=admin"
+    - "MYSQL_USER=geomesse"
+    - "MYSQL_PASSWORD=geomesse"
+    - "MYSQL_DATABASE=carpedeum"
 
-app:
-  image: node:wheezy
+engine:
+  build: ./docker/engine
   volumes:
-    - ./client:/app
-  working_dir: /app
-  ports:
-    - "8083:8083"
-    # livereload port
-    - "35729:35729"
+    - "./api:/home/docker:rw"
+    - "./docker/engine/php.ini:/usr/local/etc/php/conf.d/custom.ini:ro"
+  working_dir: "/home/docker"
   links:
-    - api
-  environment:
-    APP_PORT: "8083"
-  command: npm run watch
+   - "db:db"
