@@ -5,8 +5,8 @@
 /var/logs/*
 !var/logs/.gitkeep
 /var/phpunit.xml
-/bin/
-api/vendor/
-api/web/bundles/
+/var/sessions/*
+/bin/symfony_requirements
+/vendor/
+/web/bundles/
 docker-compose.dev.yml
-

@@ -11,7 +11,7 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -19,7 +19,7 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    #serializer:      { enable_annotations: true }
+    serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
@@ -48,8 +48,16 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        server_version: 5.7
+        types:
+            polygonjson:  CarpeDeumBundle\Doctrine\Type\PolygonJsonType
+            pointjson:    CarpeDeumBundle\Doctrine\Type\PointJsonType
+            geotext:      CarpeDeumBundle\Doctrine\Type\PolygonJsonType
         mapping_types:
             enum: string
+            point: pointjson
+            geometry: polygonjson
+            geotext:  polygonjson
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -63,3 +71,22 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+doctrine_migrations:
+    namespace: Application\Migrations
+    table_name: migration_versions
+
+fos_rest:
+    routing_loader:
+        default_format: json
+
+sylius_resource:
+    resources:
+        cd.place:
+            driver: doctrine/orm
+            classes:
+                model: CarpeDeumBundle\Entity\Place
+        cd.time:
+            driver: doctrine/orm
+            classes:
+                model: CarpeDeumBundle\Entity\Time

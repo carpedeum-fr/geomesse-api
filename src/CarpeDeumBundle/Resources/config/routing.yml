@@ -1,3 +1,4 @@
-carpe_deum_homepage:
-    path:     /
-    defaults: { _controller: CarpeDeumBundle:Default:index }
+carpe_deum_place:
+    resource: "@CarpeDeumBundle/Resources/config/routing/place.yml"
+    prefix: /place
+    type: rest
