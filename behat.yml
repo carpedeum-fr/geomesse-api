@@ -10,7 +10,7 @@ default:
                 - "%paths.base%/tests/features"
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - CDBehat\Sylius\WebContext
+                - CDBehat\WebContext
                 - CDBehat\FixtureContext
     extensions:
         Behat\MinkExtension:
