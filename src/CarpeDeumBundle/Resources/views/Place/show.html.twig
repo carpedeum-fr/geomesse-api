@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-md-6">
+        <div class="one-half column">
             <h1>{{ place.name }}</h1>
             <ul>
                 <li>{{ place.address }}</li>
@@ -15,16 +15,20 @@
             <p>Notes : {{ place.notes }}</p>
             <p>Messes : {{ place.eucharist }}</p>
         </div>
-        <div class="col-md-6">
+        <div class="one-half column">
             <img src="//mediaauto.carpedeum.fr/300x300{{ place.pic }}">
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <table class="table">
-                <th>
-                    <td colspan="2">Messes de semaine</td>
-                </th>
+        <div class="one-half column">
+            <table class="u-full-width">
+                <thead>
+                <tr>
+                    <th>
+                        <td colspan="2">Messes de semaine</td>
+                    </th>
+                </tr>
+                </thead>
                 {% for time in place.timetable if time.dayOfWeek < 6 %}
                     <tr>
                         <td>{{ constant('DAYS_OF_WEEK', time)[time.dayOfWeek] }}</td>
@@ -33,8 +37,8 @@
                 {% endfor %}
             </table>
         </div>
-        <div class="col-md-6">
-            <table class="table">
+        <div class="one-half column">
+            <table class="u-full-width">
                 <th>
                     <td colspan="2">Week-end</td>
                 </th>

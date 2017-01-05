@@ -11,9 +11,10 @@ var fontsFolder = './web/vendor/fonts/';
 
 gulp.task('default', function() {
     gulp.src([
-        './node_modules/bootstrap/dist/css/bootstrap.min.css',
-        './node_modules/select2/dist/css/select2.min.css',
-        './node_modules/font-awesome/css/font-awesome.min.css'
+        './node_modules/skeleton-css/css/normalize.css',
+        './node_modules/skeleton-css/css/skeleton.css',
+        './node_modules/font-awesome/css/font-awesome.min.css',
+        './web/bundles/carpedeum/css/admin.css'
     ])
         //.pipe(sourcemaps.init())
         .pipe(concat('vendor.css'))
@@ -23,16 +24,14 @@ gulp.task('default', function() {
         //.pipe(sourcemaps.write())
         .pipe(gulp.dest(cssFolder));
 
-    gulp.src([
-        './node_modules/jquery/dist/jquery.min.js',
-        './node_modules/bootstrap/dist/js/bootstrap.min.js',
+    /*gulp.src([
         './node_modules/select2/dist/js/select2.min.js'
     ])
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest(jsFolder))
         .pipe(rename('vendor.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest(jsFolder));
+        .pipe(gulp.dest(jsFolder));*/
 
     gulp.src('./node_modules/font-awesome/fonts/*.*')
         .pipe(gulp.dest(fontsFolder));

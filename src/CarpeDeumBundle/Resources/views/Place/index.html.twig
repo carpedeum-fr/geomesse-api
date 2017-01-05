@@ -3,19 +3,23 @@
 {% block title %}Places{% endblock %}
 
 {% block body %}
-    {{ pagerfanta(places, 'twitter_bootstrap3_translated') }}
+    <div class="row">
+        {{ pagerfanta(places) }}
 
-    <table class="table">
-        {% for place in places %}
-            <tr>
-                <td><a href="{{ path('place_show', {id: place.id}) }}">{{ place.id }}</a></td>
-                <td>{{ place.name|raw }}</td>
-                <td>{{ place.zipcode }}</td>
-                <td>{{ place.city }}</td>
-                <td>{{ place.country }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+        <table class="u-full-width">
+            <tbody>
+                {% for place in places %}
+                    <tr>
+                        <td><a href="{{ path('place_show', {id: place.id}) }}">{{ place.id }}</a></td>
+                        <td>{{ place.name|raw }}</td>
+                        <td>{{ place.zipcode }}</td>
+                        <td>{{ place.city }}</td>
+                        <td>{{ place.country }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    {{ pagerfanta(places, 'twitter_bootstrap3_translated') }}
+        {{ pagerfanta(places) }}
+    </div>
 {% endblock %}
