@@ -17,6 +17,8 @@ class Time implements ResourceInterface
 {
     use TimestampableTrait;
 
+    const DAYS_OF_WEEK = ["", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
+
     /**
      * @var int
      *

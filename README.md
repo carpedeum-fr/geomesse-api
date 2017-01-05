@@ -3,6 +3,53 @@ carpedeum
 
 [![CircleCI](https://circleci.com/gh/carpedeum-fr/carpedeum/tree/master.svg?style=svg)](https://circleci.com/gh/carpedeum-fr/carpedeum/tree/master)
 
+## Routes
+
+First run `php bin/console server:start`
+
+### API
+
+Available API routes (from `php bin/console debug:router`):
+
+```
+ -------------------------- -------- -------- ------ -----------------------------------
+  Name                       Method   Scheme   Host   Path
+ -------------------------- -------- -------- ------ -----------------------------------
+  api_place_index            ANY      ANY      ANY    /api/place/.{_format}
+  api_place_show             ANY      ANY      ANY    /api/place/{id}.{_format}
+```
+
+Example:
+
+```
+http://127.0.0.1:8000/place/
+```
+
+### Front
+
+Available API routes (from `php bin/console debug:router`):
+
+```
+ -------------------------- -------- -------- ------ -----------------------------------
+  Name                       Method   Scheme   Host   Path
+ -------------------------- -------- -------- ------ -----------------------------------
+  place_index                ANY      ANY      ANY    /place/
+  place_show                 ANY      ANY      ANY    /place/{id}
+```
+
+Example:
+
+```
+http://127.0.0.1:8000/api/place/
+```
+
+## Assets
+
+```
+npm install
+gulp
+```
+
 ## Importing existing schema
 
 ### Reverse engineering

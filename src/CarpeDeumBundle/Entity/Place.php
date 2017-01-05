@@ -53,35 +53,35 @@ class Place implements GeolocalizableInterface, ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="pic_credits", type="text")
+     * @ORM\Column(name="pic_credits", type="text", nullable=true)
      */
     private $picCredits;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pics", type="text")
+     * @ORM\Column(name="pics", type="text", nullable=true)
      */
     private $pics;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pics_list", type="text")
+     * @ORM\Column(name="pics_list", type="text", nullable=true)
      */
     private $picsList;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="vids", type="text")
+     * @ORM\Column(name="vids", type="text", nullable=true)
      */
     private $vids;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="vids_list", type="text")
+     * @ORM\Column(name="vids_list", type="text", nullable=true)
      */
     private $vidsList;
 
@@ -102,7 +102,7 @@ class Place implements GeolocalizableInterface, ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="address_2", type="text")
+     * @ORM\Column(name="address_2", type="text", nullable=true)
      */
     private $address2;
 
@@ -130,35 +130,35 @@ class Place implements GeolocalizableInterface, ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="text")
+     * @ORM\Column(name="url", type="text", nullable=true)
      */
     private $url;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="text")
+     * @ORM\Column(name="telephone", type="text", nullable=true)
      */
     private $telephone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="history", type="text")
+     * @ORM\Column(name="history", type="text", nullable=true)
      */
     private $history;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="notes", type="text")
+     * @ORM\Column(name="notes", type="text", nullable=true)
      */
     private $notes;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="eucharist", type="text")
+     * @ORM\Column(name="eucharist", type="text", nullable=true)
      */
     private $eucharist;
 
@@ -172,6 +172,15 @@ class Place implements GeolocalizableInterface, ResourceInterface
     public function __construct()
     {
         $this->timetable = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updateAddress()
+    {
+        $this->address = $this->address1.' '.$this->address2.' '.$this->zipCode.' '.$this->city.' '.$this->country;
     }
 
     /**

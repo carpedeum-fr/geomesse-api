@@ -25,6 +25,8 @@ database:
 test:
   override:
     - composer validate
+    - bin/behat --format junit --out $CIRCLE_TEST_REPORTS/ --no-interaction:
+        timeout: 600 # 30 minutes
   post:
     - "cat var/logs/test.log|grep -E 'CRITICAL|ERROR'>var/logs/test_error.log || :"
     - cp var/logs/test_error.log $CIRCLE_TEST_REPORTS/test.log

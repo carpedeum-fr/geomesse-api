@@ -1,0 +1,32 @@
+default:
+    formatters:
+        pretty:
+            verbose:  true
+            paths:    true
+            snippets: false
+    suites:
+        default:
+            paths:
+                - "%paths.base%/tests/features"
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - CDBehat\WebContext
+                - CDBehat\FixtureContext
+    extensions:
+        Behat\MinkExtension:
+            sessions:
+                default:
+                    symfony2: ~
+                javascript:
+                    selenium2: ~
+            browser_name: firefox
+            show_auto:    false
+            base_url:     https://www.geomesse.com
+        Behat\Symfony2Extension: ~
+        SensioLabs\Behat\PageObjectExtension:
+            namespaces:
+                page: [Behat\Page]
+        CDBehat\PageObjectExtension: ~
+        jarnaiz\JUnitFormatter\JUnitFormatterExtension:
+            filename: junit.xml
+            outputDir: %paths.base%/behat

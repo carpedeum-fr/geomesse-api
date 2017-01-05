@@ -1,7 +1,9 @@
+/node_modules/
 /var/bootstrap.php.cache
 /var/cache/*
 !var/cache/.gitkeep
 /app/config/parameters.yml
+/app/config/*.local.yml
 /var/logs/*
 !var/logs/.gitkeep
 /var/phpunit.xml
@@ -9,3 +11,4 @@
 /bin/symfony_requirements
 /vendor/
 /web/bundles/
+/web/vendor/

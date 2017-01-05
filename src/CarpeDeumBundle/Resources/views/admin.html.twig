@@ -1,0 +1,49 @@
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}{% endblock %} - GeoMesse</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    {% block stylesheets %}
+        <link href="{{ asset('vendor/css/vendor.min.css') }}" type="text/css" rel="stylesheet"/>
+        <link href="{{ asset('bundles/syliusresource/css/form-collection.css') }}" type="text/css" rel="stylesheet"/>
+    {% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">GeoMesse</a>
+        </div>
+    </div>
+</nav>
+
+
+<div class="{% block container %}container{% endblock %}">
+    {% block flashes %}
+        {% for name, flashes in app.session.flashbag.all %}
+            {% for flash in flashes %}
+                <div class="alert alert-{{ name == 'error' ? 'danger' : name == 'notice' ? 'warning' : name }}">
+                    <a class="close" data-dismiss="alert" href="#"><i class="fa fa-times"></i></a>
+                    {{ flash|trans }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endblock %}
+
+    {% block body %}{% endblock %}
+</div>
+
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('vendor/js/vendor.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/syliusresource/js/form-collection.js') }}"></script>
+{% endblock %}
+</body>
+</html>
