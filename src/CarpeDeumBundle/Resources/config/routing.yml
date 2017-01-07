@@ -1,3 +1,8 @@
 carpe_deum_place:
     resource: "@CarpeDeumBundle/Resources/config/routing/place.yml"
     prefix: /place
+
+carpe_deum_static:
+    resource: "@CarpeDeumBundle/Controller/StaticPageController.php"
+    type:     annotation
+    prefix:   /
