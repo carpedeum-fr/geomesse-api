@@ -5,9 +5,9 @@ namespace CarpeDeumBundle\Controller;
 
 use CarpeDeumBundle\Entity\Place;
 use GuzzleHttp\Client;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,23 +43,23 @@ class MessengerBotController extends Controller
             $response = [
                 'recipient' => ['id' => $userId],
                 'message'   => [
-                    'text' => "Salut ! Partage ta géolocalisation et je te trouve une messe.",
+                    'text'          => "Salut ! Partage ta géolocalisation et je te trouve une messe.",
                     'quick_replies' => [
                         [
                             'content_type' => 'location',
                         ],
-                    ]
-                ]
+                    ],
+                ],
             ];
         } elseif (isset($coordinates)) {
             $places = $this->get('cd.repository.place')->findBy([
                 'near_json' => [
                     'shape' => json_encode([
                         'type'        => 'Point',
-                        'coordinates' => array($coordinates['long'], $coordinates['lat']),
+                        'coordinates' => [$coordinates['long'], $coordinates['lat']],
                     ]),
-                    'distance' => 0.1
-                ]],
+                    'distance' => 0.1,
+                ], ],
                 [],
                 3
             );
@@ -69,16 +69,16 @@ class MessengerBotController extends Controller
                 /** @var Place $currentPlace */
                 $currentPlace = $place[0];
                 $elements[] = [
-                    'title' => $currentPlace->getName(),
-                    'image_url' => 'http://mediaauto.carpedeum.fr/300x300'.$currentPlace->getPic(),
-                    'subtitle' => $currentPlace->getAddress1(),
+                    'title'          => $currentPlace->getName(),
+                    'image_url'      => 'http://mediaauto.carpedeum.fr/300x300'.$currentPlace->getPic(),
+                    'subtitle'       => $currentPlace->getAddress1(),
                     'default_action' => [
-                        'type' => 'web_url',
-                        'url' => 'https://geomesse.ghirardotti.fr'.$this->generateUrl('place_show', ['id' => $currentPlace->getId()]),
+                        'type'                 => 'web_url',
+                        'url'                  => 'https://geomesse.ghirardotti.fr'.$this->generateUrl('place_show', ['id' => $currentPlace->getId()]),
                         'messenger_extensions' => true,
                         'webview_height_ratio' => 'tall',
-                        'fallback_url' => 'https://geomesse.ghirardotti.fr'.$this->generateUrl('home'),
-                    ]
+                        'fallback_url'         => 'https://geomesse.ghirardotti.fr'.$this->generateUrl('home'),
+                    ],
                 ];
             }
 
@@ -86,14 +86,14 @@ class MessengerBotController extends Controller
                 'recipient' => ['id' => $userId],
                 'message'   => [
                     'attachment' => [
-                        'type' => 'template',
+                        'type'    => 'template',
                         'payload' => [
-                            'template_type' => 'list',
+                            'template_type'     => 'list',
                             'top_element_style' => 'compact',
-                            'elements' => $elements
-                        ]
-                    ]
-                ]
+                            'elements'          => $elements,
+                        ],
+                    ],
+                ],
             ];
         }
 
@@ -104,7 +104,7 @@ class MessengerBotController extends Controller
     }
 
     /**
-     * Because of this : https://developers.facebook.com/docs/messenger-platform/thread-settings/domain-whitelisting
+     * Because of this : https://developers.facebook.com/docs/messenger-platform/thread-settings/domain-whitelisting.
      *
      * @Route("/domain-whitelisting", name="messenger_domain_whitelisting")
      * @Method("GET")
@@ -113,9 +113,9 @@ class MessengerBotController extends Controller
     {
         $accessToken = $this->getParameter('messenger_access_token');
         $response = [
-            'setting_type' => 'domain_whitelisting',
+            'setting_type'        => 'domain_whitelisting',
             'whitelisted_domains' => ['https://geomesse.ghirardotti.fr'],
-            'domain_action_type' => 'add',
+            'domain_action_type'  => 'add',
         ];
 
         $client = new Client(['base_uri' => 'https://graph.facebook.com/v2.6/me/']);

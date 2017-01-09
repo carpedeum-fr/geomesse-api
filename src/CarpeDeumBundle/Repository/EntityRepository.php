@@ -2,8 +2,8 @@
 
 namespace CarpeDeumBundle\Repository;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository as BaseEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository as BaseEntityRepository;
 
 /**
  * Doctrine ORM driver entity repository.
@@ -13,7 +13,7 @@ use Doctrine\ORM\QueryBuilder;
 class EntityRepository extends BaseEntityRepository
 {
     /**
-     * Overridden just because original implementation hardcode 'o' as the alias
+     * Overridden just because original implementation hardcode 'o' as the alias.
      *
      * {@inheritdoc}
      */
@@ -38,8 +38,7 @@ class EntityRepository extends BaseEntityRepository
             ->getQueryBuilder()
             ->andWhere($this->getAlias().'.id = '.intval($id))
             ->getQuery()
-            ->getOneOrNullResult()
-            ;
+            ->getOneOrNullResult();
     }
 
     /**
@@ -50,8 +49,7 @@ class EntityRepository extends BaseEntityRepository
         return $this
             ->getCollectionQueryBuilder()
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     /**
@@ -67,8 +65,7 @@ class EntityRepository extends BaseEntityRepository
 
         return $queryBuilder
             ->getQuery()
-            ->getOneOrNullResult()
-            ;
+            ->getOneOrNullResult();
     }
 
     /**
@@ -96,8 +93,7 @@ class EntityRepository extends BaseEntityRepository
 
         return $queryBuilder
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     /**
@@ -117,9 +113,10 @@ class EntityRepository extends BaseEntityRepository
     }
 
     /**
-     * Overridden just because original implementation hardcode 'o' as alias
+     * Overridden just because original implementation hardcode 'o' as alias.
      *
      * @param string $name
+     *
      * @return string
      */
     protected function getPropertyName($name)

@@ -12,9 +12,9 @@ class PlaceRepository extends EntityRepository
         $this->applyCriteria($qb, ['near_json' => [
             'shape' => json_encode([
                 'type'        => 'Point',
-                'coordinates' => array((float)$lng, (float)$lat),
+                'coordinates' => [(float)$lng, (float)$lat],
             ]),
-            'distance' => 0.1
+            'distance' => 0.1,
         ]]);
 
         return $this->getPaginator($qb);
@@ -24,16 +24,16 @@ class PlaceRepository extends EntityRepository
     {
         $qb = $this->getCollectionQueryBuilder();
         $this->applyCriteria($qb, [
-            'inside_json' => json_encode(array(
+            'inside_json' => json_encode([
                 'type'        => 'Polygon',
-                'coordinates' => array(array(
-                    array($lng1, $lat1),
-                    array($lng1, $lat2),
-                    array($lng2, $lat2),
-                    array($lng2, $lat1),
-                    array($lng1, $lat1),
-                )),
-            ))
+                'coordinates' => [[
+                    [$lng1, $lat1],
+                    [$lng1, $lat2],
+                    [$lng2, $lat2],
+                    [$lng2, $lat1],
+                    [$lng1, $lat1],
+                ]],
+            ]),
         ]);
 
         return $qb->getQuery()->getResult();
@@ -49,13 +49,12 @@ class PlaceRepository extends EntityRepository
         return $this->getPaginator($queryBuilder);
     }
 
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
     {
-        if (isset($criteria['inside_json']))  {
+        if (isset($criteria['inside_json'])) {
             $queryBuilder
                 ->andWhere('CONTAINS(GeomFromJson(:inside_json), p.geoPoint) > 0')
-                ->setParameter('inside_json', $criteria['inside_json'])
-            ;
+                ->setParameter('inside_json', $criteria['inside_json']);
 
             unset($criteria['inside_json']);
         }
@@ -67,8 +66,7 @@ class PlaceRepository extends EntityRepository
                     'shape' => $criteria['near_json']['shape'],
                     'distance' => $criteria['near_json']['distance']
                 ])
-                ->orderBy('DISTANCE(p.geoPoint, GeomFromJson(:shape))', 'ASC')
-            ;
+                ->orderBy('DISTANCE(p.geoPoint, GeomFromJson(:shape))', 'ASC');
 
             unset($criteria['near_json']);
         }
