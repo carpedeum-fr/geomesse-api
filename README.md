@@ -45,7 +45,19 @@ http://127.0.0.1:8000/api/place/
 
 ## Assets
 
+On a new server :
+
 ```
+npm install-g gulp
+APACHEUSER=`ps aux | grep -E '[a]pache|[h]ttpd' | grep -v root | head -1 | cut -d\  -f1`
+sudo setfacl -R -m u:$APACHEUSER:rwX -m u:`whoami`:rwX var/cache var/logs var/sessions
+sudo setfacl -dR -m u:$APACHEUSER:rwX -m u:`whoami`:rwX var/cache var/logs var/sessions
+```
+
+After each release :
+
+```
+php bin/console assets:install --symlink
 npm install
 gulp
 ```

@@ -63,6 +63,14 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        dql:
+            string_functions:
+                contains: CarpeDeumBundle\Doctrine\Functions\Contains
+                distance: CarpeDeumBundle\Doctrine\Functions\Distance
+                equals:   CarpeDeumBundle\Doctrine\Functions\Equals
+                area: CarpeDeumBundle\Doctrine\Functions\Area
+                geomfromtext: CarpeDeumBundle\Doctrine\Functions\GeomFromText
+                geomfromjson: CarpeDeumBundle\Doctrine\Functions\GeomFromJson
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -95,6 +103,8 @@ fos_oauth_server:
     access_token_class:  CarpeDeumBundle\Entity\AccessToken
     refresh_token_class: CarpeDeumBundle\Entity\RefreshToken
     auth_code_class:     CarpeDeumBundle\Entity\AuthCode
+    service:
+        user_provider: fos_user.user_provider.username
 
 sylius_resource:
     resources:
@@ -102,6 +112,7 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: CarpeDeumBundle\Entity\Place
+                repository: CarpeDeumBundle\Repository\PlaceRepository
         cd.time:
             driver: doctrine/orm
             classes:
