@@ -32,11 +32,12 @@ abstract class SymfonyPage extends Page
     /**
      * @param string $element
      * @param string $text
+     *
      * @return bool
      */
     public function findByText($element, $text)
     {
-        return $this->hasElement($element) && $this->getElement($element)->has('named', array('content', $text));
+        return $this->hasElement($element) && $this->getElement($element)->has('named', ['content', $text]);
     }
 
     /**
@@ -44,7 +45,7 @@ abstract class SymfonyPage extends Page
      *
      * @return string
      */
-    protected function getUrl(array $urlParameters = array())
+    protected function getUrl(array $urlParameters = [])
     {
         if (null === static::ROUTE) {
             throw new \RuntimeException('You need to provide route name, null given');

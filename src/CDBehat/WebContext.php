@@ -43,9 +43,9 @@ class WebContext extends BaseWebContext
         $parts = parse_url($url);
 
         $fragment = empty($parts['fragment']) ? '' : '#'.$parts['fragment'];
-        $path     = empty($parts['path']) ? '/' : $parts['path'];
-        $query    = empty($parts['query']) ? '' : '?' . $parts['query'];
+        $path = empty($parts['path']) ? '/' : $parts['path'];
+        $query = empty($parts['query']) ? '' : '?'.$parts['query'];
 
-        return preg_replace('/^\/[^\.\/]+\.php/', '', $path) . $query . $fragment;
+        return preg_replace('/^\/[^\.\/]+\.php/', '', $path).$query.$fragment;
     }
 }

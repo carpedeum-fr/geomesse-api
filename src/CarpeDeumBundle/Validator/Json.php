@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class Json extends Constraint
 {
-    public $message = "This field must be a valid JSON string.";
+    public $message = 'This field must be a valid JSON string.';
 
     public function validatedBy()
     {

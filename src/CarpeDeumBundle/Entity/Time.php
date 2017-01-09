@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
- * Time
+ * Time.
  *
  * @ORM\Table(name="time")
  * @ORM\Entity
@@ -17,7 +17,7 @@ class Time implements ResourceInterface
 {
     use TimestampableTrait;
 
-    const DAYS_OF_WEEK = ["", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
+    const DAYS_OF_WEEK = ['', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 
     /**
      * @var int

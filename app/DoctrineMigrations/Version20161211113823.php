@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Add createdAt/updatedAt and cleanup
+ * Add createdAt/updatedAt and cleanup.
  */
 class Version20161211113823 extends AbstractMigration
 {

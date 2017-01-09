@@ -14,12 +14,12 @@ namespace CDBehat\PageObjectExtension\ServiceContainer;
 use Behat\Symfony2Extension\ServiceContainer\Symfony2Extension;
 use Behat\Testwork\ServiceContainer\Extension;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
+use CDBehat\PageObjectExtension\Factory\PageObjectFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\Routing\RouterInterface;
-use CDBehat\PageObjectExtension\Factory\PageObjectFactory;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -72,8 +72,7 @@ final class PageObjectExtension implements Extension
                 $router,
             ])
             ->setDecoratedService('sensio_labs.page_object_extension.page_factory')
-            ->setPublic(false)
-        ;
+            ->setPublic(false);
     }
 
     /**
