@@ -1,6 +1,5 @@
 <?php
 
-
 namespace CarpeDeumBundle\Controller;
 
 use CarpeDeumBundle\Entity\Place;
