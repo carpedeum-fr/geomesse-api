@@ -43,7 +43,7 @@ class MessengerBotController extends Controller
             $response = [
                 'recipient' => ['id' => $userId],
                 'message'   => [
-                    'text'          => "Salut ! Partage ta géolocalisation et je te trouve une messe.",
+                    'text'          => 'Salut ! Partage ta géolocalisation et je te trouve une messe.',
                     'quick_replies' => [
                         [
                             'content_type' => 'location',

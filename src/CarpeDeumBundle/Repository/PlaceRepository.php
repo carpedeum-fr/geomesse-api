@@ -12,7 +12,7 @@ class PlaceRepository extends EntityRepository
         $this->applyCriteria($qb, ['near_json' => [
             'shape' => json_encode([
                 'type'        => 'Point',
-                'coordinates' => [(float)$lng, (float)$lat],
+                'coordinates' => [(float) $lng, (float) $lat],
             ]),
             'distance' => 0.1,
         ]]);
@@ -63,8 +63,8 @@ class PlaceRepository extends EntityRepository
             $queryBuilder
                 ->andWhere('DISTANCE(p.geoPoint, GeomFromJson(:shape)) < :distance')
                 ->setParameters([
-                    'shape' => $criteria['near_json']['shape'],
-                    'distance' => $criteria['near_json']['distance']
+                    'shape'    => $criteria['near_json']['shape'],
+                    'distance' => $criteria['near_json']['distance'],
                 ])
                 ->orderBy('DISTANCE(p.geoPoint, GeomFromJson(:shape))', 'ASC');
 
