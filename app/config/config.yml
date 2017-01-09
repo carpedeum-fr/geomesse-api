@@ -80,6 +80,22 @@ fos_rest:
     routing_loader:
         default_format: json
 
+nelmio_api_doc:
+    cache:
+        enabled: true
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: CarpeDeumBundle\Entity\User
+
+fos_oauth_server:
+    db_driver: orm
+    client_class:        CarpeDeumBundle\Entity\Client
+    access_token_class:  CarpeDeumBundle\Entity\AccessToken
+    refresh_token_class: CarpeDeumBundle\Entity\RefreshToken
+    auth_code_class:     CarpeDeumBundle\Entity\AuthCode
+
 sylius_resource:
     resources:
         cd.place:
