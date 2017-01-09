@@ -6,6 +6,39 @@ use Doctrine\ORM\QueryBuilder;
 
 class PlaceRepository extends EntityRepository
 {
+    public function getNear($lat, $lng)
+    {
+        $qb = $this->getCollectionQueryBuilder();
+        $this->applyCriteria($qb, ['near_json' => [
+            'shape' => json_encode([
+                'type'        => 'Point',
+                'coordinates' => array((float)$lng, (float)$lat),
+            ]),
+            'distance' => 0.1
+        ]]);
+
+        return $this->getPaginator($qb);
+    }
+
+    public function getBound($lat1, $lng1, $lat2, $lng2)
+    {
+        $qb = $this->getCollectionQueryBuilder();
+        $this->applyCriteria($qb, [
+            'inside_json' => json_encode(array(
+                'type'        => 'Polygon',
+                'coordinates' => array(array(
+                    array($lng1, $lat1),
+                    array($lng1, $lat2),
+                    array($lng2, $lat2),
+                    array($lng2, $lat1),
+                    array($lng1, $lat1),
+                )),
+            ))
+        ]);
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function createPaginator(array $criteria = [], array $sorting = [])
     {
         $queryBuilder = $this->createQueryBuilder('p');
@@ -29,13 +62,12 @@ class PlaceRepository extends EntityRepository
 
         if (isset($criteria['near_json'])) {
             $queryBuilder
-                ->addSelect('DISTANCE(p.geoPoint, GeomFromJson(:shape)) AS distance')
                 ->andWhere('DISTANCE(p.geoPoint, GeomFromJson(:shape)) < :distance')
                 ->setParameters([
                     'shape' => $criteria['near_json']['shape'],
                     'distance' => $criteria['near_json']['distance']
                 ])
-                ->orderBy('distance', 'ASC')
+                ->orderBy('DISTANCE(p.geoPoint, GeomFromJson(:shape))', 'ASC')
             ;
 
             unset($criteria['near_json']);
