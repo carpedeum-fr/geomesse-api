@@ -33,7 +33,7 @@ class FixtureContext extends DefaultFixtureContext
 
         $em->persist($place);
 
-        for ($i=0; $i<$nb; $i++) {
+        for ($i = 0; $i < $nb; $i++) {
             /** @var Place $place */
             $place = $factory->createNew();
             $place->setCreatedAt($now);

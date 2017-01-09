@@ -2,14 +2,14 @@
 
 namespace CarpeDeumBundle\Entity;
 
-use CarpeDeumBundle\Entity\Traits\TimestampableTrait;
 use CarpeDeumBundle\Entity\Traits\GeolocalizableTrait;
+use CarpeDeumBundle\Entity\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
- * Place
+ * Place.
  *
  * @ORM\Table(name="place")
  * @ORM\Entity

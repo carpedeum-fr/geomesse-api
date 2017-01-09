@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Try to fix problem with dates
+ * Try to fix problem with dates.
  */
 class Version20161211144352 extends AbstractMigration
 {

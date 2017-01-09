@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Setup MySQL geo data
+ * Setup MySQL geo data.
  */
 class Version20161211121128 extends AbstractMigration
 {

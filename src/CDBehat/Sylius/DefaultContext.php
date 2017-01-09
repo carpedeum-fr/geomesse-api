@@ -45,10 +45,10 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      * @var array
      */
     protected $actions = [
-        'viewing' => 'show',
-        'creation' => 'create',
-        'editing' => 'update',
-        'building' => 'build',
+        'viewing'       => 'show',
+        'creation'      => 'create',
+        'editing'       => 'update',
+        'building'      => 'build',
         'customization' => 'customize',
     ];
 
@@ -109,16 +109,15 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      * @param string $type
      * @param array  $criteria
      *
-     * @return object
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return object
      */
     protected function findOneBy($type, array $criteria)
     {
         $resource = $this
             ->getRepository($type)
-            ->findOneBy($criteria)
-        ;
+            ->findOneBy($criteria);
 
         if (null === $resource) {
             throw new \InvalidArgumentException(
@@ -259,9 +258,9 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * Get current user instance.
      *
-     * @return UserInterface|null
-     *
      * @throws \Exception
+     *
+     * @return UserInterface|null
      */
     protected function getUser()
     {
@@ -291,9 +290,9 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * @param string  $route
-     * @param array   $parameters
-     * @param bool $absolute
+     * @param string $route
+     * @param array  $parameters
+     * @param bool   $absolute
      *
      * @return string
      */
@@ -372,11 +371,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
     /**
      * @param NodeElement $table
-     * @param string $columnName
-     *
-     * @return int
+     * @param string      $columnName
      *
      * @throws \Exception If column was not found
+     *
+     * @return int
      */
     protected function getColumnIndex(NodeElement $table, $columnName)
     {
@@ -401,18 +400,18 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
     /**
      * @param NodeElement $table
-     * @param array $fields
-     *
-     * @return NodeElement|null
+     * @param array       $fields
      *
      * @throws \Exception If column was not found
+     *
+     * @return NodeElement|null
      */
     protected function getRowWithFields(NodeElement $table, array $fields)
     {
         $foundRows = $this->getRowsWithFields($table, $fields, true);
 
         if (empty($foundRows)) {
-            return null;
+            return;
         }
 
         return current($foundRows);
@@ -420,12 +419,12 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
     /**
      * @param NodeElement $table
-     * @param array $fields
-     * @param bool $onlyFirstOccurrence
-     *
-     * @return NodeElement[]
+     * @param array       $fields
+     * @param bool        $onlyFirstOccurrence
      *
      * @throws \Exception If columns or rows were not found
+     *
+     * @return NodeElement[]
      */
     protected function getRowsWithFields(NodeElement $table, array $fields, $onlyFirstOccurrence = false)
     {
@@ -480,11 +479,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
     /**
      * @param NodeElement $table
-     * @param string[] $fields
-     *
-     * @return string[]
+     * @param string[]    $fields
      *
      * @throws \Exception
+     *
+     * @return string[]
      */
     protected function replaceColumnNamesWithColumnIds(NodeElement $table, array $fields)
     {
@@ -500,12 +499,12 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
     /**
      * @param callable $callback
-     * @param int $limit
-     * @param int $delay In milliseconds
-     *
-     * @return mixed
+     * @param int      $limit
+     * @param int      $delay    In milliseconds
      *
      * @throws \RuntimeException If timeout was reached
+     *
+     * @return mixed
      */
     protected function waitFor(callable $callback, $limit = 30, $delay = 100)
     {
@@ -525,9 +524,9 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * @param string $name
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException If name is not found in country code registry.
+     *
+     * @return string
      */
     protected function getCountryCodeByEnglishCountryName($name)
     {
@@ -546,9 +545,9 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * @param string $name
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException If name is not found in locale code registry.
+     *
+     * @return string
      */
     protected function getLocaleCodeByEnglishLocaleName($name)
     {

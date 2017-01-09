@@ -12,10 +12,10 @@
 namespace CDBehat\PageObjectExtension\Factory;
 
 use Behat\Mink\Mink;
+use CDBehat\PageObjectExtension\SymfonyPage;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Factory\ClassNameResolver;
 use Symfony\Component\Routing\RouterInterface;
-use CDBehat\PageObjectExtension\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -40,7 +40,7 @@ final class PageObjectFactory implements Factory
     /**
      * @var array
      */
-    private $pageParameters = array();
+    private $pageParameters = [];
 
     /**
      * @var RouterInterface
@@ -48,11 +48,11 @@ final class PageObjectFactory implements Factory
     private $router;
 
     /**
-     * @param Factory $decoratedFactory
-     * @param Mink $mink
+     * @param Factory           $decoratedFactory
+     * @param Mink              $mink
      * @param ClassNameResolver $classNameResolver
-     * @param array $pageParameters
-     * @param RouterInterface $router
+     * @param array             $pageParameters
+     * @param RouterInterface   $router
      */
     public function __construct(
         Factory $decoratedFactory,

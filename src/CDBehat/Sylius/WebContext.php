@@ -149,7 +149,7 @@ class WebContext extends DefaultContext
             return;
         }
 
-        if('product option' === $type) {
+        if ('product option' === $type) {
             $this->iAmDoingSomethingWithResource($action, $type, 'code', $name);
 
             return;

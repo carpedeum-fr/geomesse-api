@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Small caps, index and cleanup
+ * Small caps, index and cleanup.
  */
 class Version20161206155852 extends AbstractMigration
 {

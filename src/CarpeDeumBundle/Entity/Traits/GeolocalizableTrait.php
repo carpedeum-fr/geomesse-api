@@ -7,16 +7,15 @@ use CarpeDeumBundle\Validator\Json;
 
 trait GeolocalizableTrait
 {
-
     /**
-     * @var float $longitude
+     * @var float
      *
      * @ORM\Column(name="longitude", type="float")
      */
     private $longitude;
 
     /**
-     * @var float $latitude
+     * @var float
      *
      * @ORM\Column(name="latitude", type="float")
      */
@@ -40,7 +39,6 @@ trait GeolocalizableTrait
         $this->geoPoint = '{ "type": "Point", "coordinates": ['.$this->longitude.', '.$this->latitude.'] }';
     }
 
-
     public function calculateDistance(GeolocalizableInterface $geolocalizable)
     {
         // We approximate that Earth is flat, sorry Galileo!
@@ -58,10 +56,10 @@ trait GeolocalizableTrait
      */
     public function getPosition()
     {
-        return array(
+        return [
             $this->getLongitude(),
             $this->getLatitude(),
-        );
+        ];
     }
 
     /**
