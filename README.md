@@ -25,6 +25,37 @@ Example:
 http://127.0.0.1:8000/place/
 ```
 
+#### oAuth2
+
+To create a client:
+
+```
+[0] % php bin/console cd:oauth-server:client-create facebook --grant-type=password
+Added a new client with name facebook and public id 3_2786j2vc3gn4g80o4s8o0g0ws84ow0440gkoo80g4wwk4gsgkk.
+```
+
+Warning, in DB, the client `random_id` is stored without the `2_`. But if you forgot it, it will not work.
+
+To retrieve an access token :
+
+http://127.0.0.1:8000/oauth/v2/token?client_id=[RANDOM_ID]&client_secret=[SECRET]&grant_type=password&username=[USERNAME]&password=[PASSWORD]
+http://127.0.0.1:8000/oauth/v2/token?client_id=3_2786j2vc3gn4g80o4s8o0g0ws84ow0440gkoo80g4wwk4gsgkk&client_secret=4hpy482lklmo8w0gocwocs84wksc844w8cc0848okwsk8c8wgc&grant_type=password&username=lolo&password=lolo
+
+It return something like:
+
+```
+{"access_token":"N2RmYTM3ODkyNjU2ODA0MGFlM2UzODAwNTliNTMxYjI3YjZiMTk5MWI0NDFiMmY1MTEwMTkyYzhlY2JlZmM1Zg","expires_in":3600,"token_type":"bearer","scope":null,"refresh_token":"ODcwOTQ5ZTcxMmRmOGUyZGE1ZTZhMjJiOGJiMTUzYWU2NDE4MDFmMjVhYThkNGY1NzFjZjhkNDQ5NGM0NDBhMw"}
+```
+
+Then you can access api with the token like:
+
+http://127.0.0.1:8000/api/place/?access_token=[ACCESS_TOKEN]
+http://127.0.0.1:8000/api/place/?access_token=N2RmYTM3ODkyNjU2ODA0MGFlM2UzODAwNTliNTMxYjI3YjZiMTk5MWI0NDFiMmY1MTEwMTkyYzhlY2JlZmM1Zg
+
+For an hour only, then the token will be too old.
+
+Don't forget to add the `fos:oauth-server:clean` command to remove old tokens.
+
 ### Front
 
 Available API routes (from `php bin/console debug:router`):
@@ -48,7 +79,7 @@ http://127.0.0.1:8000/api/place/
 On a new server :
 
 ```
-npm install-g gulp
+npm install -g gulp
 APACHEUSER=`ps aux | grep -E '[a]pache|[h]ttpd' | grep -v root | head -1 | cut -d\  -f1`
 sudo setfacl -R -m u:$APACHEUSER:rwX -m u:`whoami`:rwX var/cache var/logs var/sessions
 sudo setfacl -dR -m u:$APACHEUSER:rwX -m u:`whoami`:rwX var/cache var/logs var/sessions
