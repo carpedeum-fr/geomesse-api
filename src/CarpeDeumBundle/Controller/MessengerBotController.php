@@ -3,7 +3,14 @@
 namespace CarpeDeumBundle\Controller;
 
 use CarpeDeumBundle\Entity\Place;
+use CarpeDeumBundle\Entity\Time;
 use GuzzleHttp\Client;
+use pimax\FbBotApp;
+use pimax\Messages\Message;
+use pimax\Messages\MessageButton;
+use pimax\Messages\MessageElement;
+use pimax\Messages\QuickReply;
+use pimax\Messages\StructuredMessage;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -32,74 +39,93 @@ class MessengerBotController extends Controller
     public function messengerMessageAction(Request $request)
     {
         $accessToken = $this->getParameter('messenger_access_token');
-        $message = json_decode($request->getContent(), true);
-        $messaging = $message['entry'][0]['messaging'][0];
-        $userId = $messaging['sender']['id'];
-        $messageReceived = array_key_exists('text', $messaging['message']) ? $messaging['message']['text'] : null;
-        $coordinates = array_key_exists('attachments', $messaging['message']) ? $messaging['message']['attachments'][0]['payload']['coordinates'] : null;
+        $bot = new FbBotApp($accessToken);
+        $data = json_decode($request->getContent(), true);
 
-        if (isset($messageReceived)) {
-            $response = [
-                'recipient' => ['id' => $userId],
-                'message'   => [
-                    'text'          => 'Salut ! Partage ta géolocalisation et je te trouve une messe.',
-                    'quick_replies' => [
-                        [
-                            'content_type' => 'location',
-                        ],
-                    ],
-                ],
-            ];
-        } elseif (isset($coordinates)) {
-            $places = $this->get('cd.repository.place')->findBy([
-                'near_json' => [
-                    'shape' => json_encode([
-                        'type'        => 'Point',
-                        'coordinates' => [$coordinates['long'], $coordinates['lat']],
-                    ]),
-                    'distance' => 0.1,
-                ], ],
-                [],
-                3
-            );
-
-            $elements = [];
-            foreach ($places as $place) {
-                /** @var Place $currentPlace */
-                $currentPlace = $place[0];
-                $elements[] = [
-                    'title'          => $currentPlace->getName(),
-                    'image_url'      => 'http://mediaauto.carpedeum.fr/300x300'.$currentPlace->getPic(),
-                    'subtitle'       => $currentPlace->getAddress1(),
-                    'default_action' => [
-                        'type'                 => 'web_url',
-                        'url'                  => 'https://geomesse.ghirardotti.fr'.$this->generateUrl('place_show', ['id' => $currentPlace->getId()]),
-                        'messenger_extensions' => true,
-                        'webview_height_ratio' => 'tall',
-                        'fallback_url'         => 'https://geomesse.ghirardotti.fr'.$this->generateUrl('home'),
-                    ],
-                ];
-            }
-
-            $response = [
-                'recipient' => ['id' => $userId],
-                'message'   => [
-                    'attachment' => [
-                        'type'    => 'template',
-                        'payload' => [
-                            'template_type'     => 'list',
-                            'top_element_style' => 'compact',
-                            'elements'          => $elements,
-                        ],
-                    ],
-                ],
-            ];
+        if (empty($data['entry'][0]['messaging'])) {
+            return new Response();
         }
 
-        $client = new Client(['base_uri' => 'https://graph.facebook.com/v2.6/me/']);
-        $client->post('messages', ['json' => $response, 'query' => ['access_token' => $accessToken]]);
+        foreach ($data['entry'][0]['messaging'] as $message) {
+            // Skipping delivery messages
+            if (!empty($message['delivery'])) {
+                continue;
+            }
 
-        return new JsonResponse($response);
+            $userId = $message['sender']['id'];
+            $command = "";
+
+            if (array_key_exists('message', $message)) {
+                if (array_key_exists('text', $message['message'])) {
+                    $response = new QuickReply($userId, 'Salut ! Partage ta géolocalisation et je te trouve une messe.', [
+                        ['content_type' => 'location'],
+                    ]);
+                } elseif (array_key_exists('attachments', $message['message'])) {
+                    $coordinates = $message['message']['attachments'][0]['payload']['coordinates'];
+                    $response = $this->coordinatesReply($coordinates, $userId);
+                }
+            } elseif (array_key_exists('postback', $message)) {
+                $postback =  $message['postback']['payload'];
+                $response = $this->postbackReply($postback, $userId);
+            } else {
+                $response = new Message($userId, 'Je ne comprends pas.');
+            }
+
+            $bot->send($response);
+        }
+
+        return new Response();
+    }
+
+    protected function postbackReply($postback, $userId)
+    {
+        $now = new \DateTime();
+        $placeId = str_replace('details:', '', $postback);
+        $place = $this->get('cd.repository.place')->find($placeId);
+        $timetable = $this->get('cd.repository.time')->findBy([
+            'place' => $placeId,
+            'dayOfWeek' => $now->format('w'),
+        ]);
+
+        $horaires = '';
+        /** @var Time $time */
+        foreach ($timetable as $time) {
+            $horaires .= chr(10) . '- ' . Time::DAYS_OF_WEEK[$time->getDayOfWeek()] . ' ' . $time->getTime()->format('H:i') . ' (' .$time->getNotes() . ')';
+        }
+
+        return new Message($userId, 'Voilà les prochains horaires à ' . $place->getName() . ' : ' . $horaires);
+    }
+
+    protected function coordinatesReply($coordinates, $userId)
+    {
+        $places = $this->get('cd.repository.place')->findBy([
+            'near_json' => [
+                'shape' => json_encode([
+                    'type'        => 'Point',
+                    'coordinates' => [$coordinates['long'], $coordinates['lat']],
+                ]),
+                'distance' => 0.1,
+            ], ],
+            [],
+            3
+        );
+
+        $elements = [];
+        foreach ($places as $place) {
+            /** @var Place $currentPlace */
+            $currentPlace = $place;
+            $elements[] = new MessageElement(
+                $currentPlace->getName(),
+                $currentPlace->getAddress1(),
+                'http://mediaauto.carpedeum.fr/300x300'.$currentPlace->getPic(),
+                [
+                    new MessageButton(MessageButton::TYPE_POSTBACK, 'Horaires', "details:".$currentPlace->getId()),
+                ],
+                'https://geomesse.ghirardotti.fr'.$this->generateUrl('place_show', ['id' => $currentPlace->getId()])
+            );
+        }
+
+        return new StructuredMessage($userId, StructuredMessage::TYPE_GENERIC, ['elements' => $elements]);
     }
 
     /**

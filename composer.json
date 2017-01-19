@@ -36,7 +36,8 @@
         "nelmio/api-doc-bundle":                "^2.13",
         "sylius/resource-bundle":               "@beta",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
-        "friendsofsymfony/user-bundle":         "@beta"
+        "friendsofsymfony/user-bundle":         "@beta",
+        "pimax/fb-messenger-php":               "@dev"
     },
     "require-dev": {
         "sensio/generator-bundle":                "^3.0",
