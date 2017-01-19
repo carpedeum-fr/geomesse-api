@@ -53,7 +53,6 @@ class MessengerBotController extends Controller
             }
 
             $userId = $message['sender']['id'];
-            $command = "";
 
             if (array_key_exists('message', $message)) {
                 if (array_key_exists('text', $message['message'])) {
@@ -65,8 +64,7 @@ class MessengerBotController extends Controller
                     $response = $this->coordinatesReply($coordinates, $userId);
                 }
             } elseif (array_key_exists('postback', $message)) {
-                $postback =  $message['postback']['payload'];
-                $response = $this->postbackReply($postback, $userId);
+                $response = $this->postbackReply($message['postback']['payload'], $userId);
             } else {
                 $response = new Message($userId, 'Je ne comprends pas.');
             }
@@ -83,17 +81,17 @@ class MessengerBotController extends Controller
         $placeId = str_replace('details:', '', $postback);
         $place = $this->get('cd.repository.place')->find($placeId);
         $timetable = $this->get('cd.repository.time')->findBy([
-            'place' => $placeId,
+            'place'     => $placeId,
             'dayOfWeek' => $now->format('w'),
         ]);
 
         $horaires = '';
         /** @var Time $time */
         foreach ($timetable as $time) {
-            $horaires .= chr(10) . '- ' . Time::DAYS_OF_WEEK[$time->getDayOfWeek()] . ' ' . $time->getTime()->format('H:i') . ' (' .$time->getNotes() . ')';
+            $horaires .= chr(10).'- '.Time::DAYS_OF_WEEK[$time->getDayOfWeek()].' '.$time->getTime()->format('H:i').' ('.$time->getNotes().')';
         }
 
-        return new Message($userId, 'Voilà les prochains horaires à ' . $place->getName() . ' : ' . $horaires);
+        return new Message($userId, 'Voilà les prochains horaires à '.$place->getName().' : '.$horaires);
     }
 
     protected function coordinatesReply($coordinates, $userId)
@@ -119,7 +117,7 @@ class MessengerBotController extends Controller
                 $currentPlace->getAddress1(),
                 'http://mediaauto.carpedeum.fr/300x300'.$currentPlace->getPic(),
                 [
-                    new MessageButton(MessageButton::TYPE_POSTBACK, 'Horaires', "details:".$currentPlace->getId()),
+                    new MessageButton(MessageButton::TYPE_POSTBACK, 'Horaires', 'details:'.$currentPlace->getId()),
                 ],
                 'https://geomesse.ghirardotti.fr'.$this->generateUrl('place_show', ['id' => $currentPlace->getId()])
             );
