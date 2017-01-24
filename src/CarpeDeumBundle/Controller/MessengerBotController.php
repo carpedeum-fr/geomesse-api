@@ -53,6 +53,7 @@ class MessengerBotController extends Controller
             }
 
             $userId = $message['sender']['id'];
+            $response = new Message($userId, 'Je ne comprends pas.');
 
             if (array_key_exists('message', $message)) {
                 if (array_key_exists('text', $message['message'])) {
@@ -65,8 +66,6 @@ class MessengerBotController extends Controller
                 }
             } elseif (array_key_exists('postback', $message)) {
                 $response = $this->postbackReply($message['postback']['payload'], $userId);
-            } else {
-                $response = new Message($userId, 'Je ne comprends pas.');
             }
 
             $bot->send($response);
@@ -107,6 +106,10 @@ class MessengerBotController extends Controller
             [],
             3
         );
+
+        if (0 === sizeof($places)) {
+            return new Message($userId, 'Sorry, we don\'t have any church next to your geolocation.');
+        }
 
         $elements = [];
         foreach ($places as $place) {
