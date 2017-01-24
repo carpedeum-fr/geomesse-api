@@ -95,17 +95,7 @@ class MessengerBotController extends Controller
 
     protected function coordinatesReply($coordinates, $userId)
     {
-        $places = $this->get('cd.repository.place')->findBy([
-            'near_json' => [
-                'shape' => json_encode([
-                    'type'        => 'Point',
-                    'coordinates' => [$coordinates['long'], $coordinates['lat']],
-                ]),
-                'distance' => 0.1,
-            ], ],
-            [],
-            3
-        );
+        $places = $this->get('cd.repository.place')->getResultsNear($coordinates['long'], $coordinates['lat'], 0.1, 3);
 
         if (0 === sizeof($places)) {
             return new Message($userId, 'Sorry, we don\'t have any church next to your geolocation.');

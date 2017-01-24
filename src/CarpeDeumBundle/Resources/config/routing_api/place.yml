@@ -16,8 +16,8 @@ api_place_near_search:
         _sylius:
             template: 'CarpeDeumBundle:Place:index.html.twig'
             repository:
-                method: getNear
-                arguments: [$lat, $lng]
+                method: getPaginatorNear
+                arguments: [$lng, $lat]
             paginate: 50
 
 api_place_bound_search:

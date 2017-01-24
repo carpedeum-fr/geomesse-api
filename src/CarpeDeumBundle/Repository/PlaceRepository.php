@@ -6,18 +6,43 @@ use Doctrine\ORM\QueryBuilder;
 
 class PlaceRepository extends EntityRepository
 {
-    public function getNear($lat, $lng)
+    public function getPaginatorNear($lng, $lat, $distance = .1)
+    {
+        return $this->getPaginator($this->getNear($lng, $lat, $distance));
+    }
+
+    public function getResultsNear($lng, $lat, $distance = .1, $max)
+    {
+        $qb = $this->getNear($lng, $lat, $distance)
+            ->setMaxResults($max)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @param $lng
+     * @param $lat
+     * @param float $distance
+     * @return QueryBuilder
+     */
+    public function getNear($lng, $lat, $distance = .1)
     {
         $qb = $this->getCollectionQueryBuilder();
-        $this->applyCriteria($qb, ['near_json' => [
-            'shape' => json_encode([
-                'type'        => 'Point',
-                'coordinates' => [(float) $lng, (float) $lat],
-            ]),
-            'distance' => 0.1,
-        ]]);
 
-        return $this->getPaginator($qb);
+        $this->applyCriteria($qb,
+            [
+                'near_json' => [
+                    'shape' => json_encode([
+                        'type'        => 'Point',
+                        'coordinates' => [(float) $lng, (float) $lat],
+                    ]),
+                    'distance' => $distance,
+                ]
+            ]
+        );
+
+        return $qb;
     }
 
     public function getBound($lat1, $lng1, $lat2, $lng2)
