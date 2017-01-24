@@ -77,12 +77,11 @@ class MessengerBotController extends Controller
     protected function postbackReply($postback, $userId)
     {
         $now = new \DateTime();
-        $placeId = str_replace('details:', '', $postback);
-        $place = $this->get('cd.repository.place')->find($placeId);
-        $timetable = $this->get('cd.repository.time')->findBy([
-            'place'     => $placeId,
-            'dayOfWeek' => $now->format('w'),
-        ]);
+        $data = explode(':', $postback);
+
+        $place = $this->get('cd.repository.place')->find($data[1]);
+
+        $timetable = $this->get('cd.repository.time')->getTime($place, $data[0]);
 
         $horaires = '';
         /** @var Time $time */
@@ -110,7 +109,8 @@ class MessengerBotController extends Controller
                 $currentPlace->getAddress1(),
                 'http://mediaauto.carpedeum.fr/300x300'.$currentPlace->getPic(),
                 [
-                    new MessageButton(MessageButton::TYPE_POSTBACK, 'Horaires', 'details:'.$currentPlace->getId()),
+                    new MessageButton(MessageButton::TYPE_POSTBACK, 'Semaine', 'weekday:'.$currentPlace->getId()),
+                    new MessageButton(MessageButton::TYPE_POSTBACK, 'Dimanche', 'sunday:'.$currentPlace->getId()),
                 ],
                 'https://geomesse.ghirardotti.fr'.$this->generateUrl('place_show', ['id' => $currentPlace->getId()])
             );
