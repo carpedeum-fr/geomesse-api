@@ -13,7 +13,6 @@ use pimax\Messages\QuickReply;
 use pimax\Messages\StructuredMessage;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -76,11 +75,8 @@ class MessengerBotController extends Controller
 
     protected function postbackReply($postback, $userId)
     {
-        $now = new \DateTime();
         $data = explode(':', $postback);
-
         $place = $this->get('cd.repository.place')->find($data[1]);
-
         $timetable = $this->get('cd.repository.time')->getTime($place, $data[0]);
 
         $horaires = '';
