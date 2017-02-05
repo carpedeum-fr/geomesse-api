@@ -92,7 +92,7 @@ class MessengerBotController extends Controller
     {
         $places = $this->get('cd.repository.place')->getResultsNear($coordinates['long'], $coordinates['lat'], 0.1, 3);
 
-        if (0 === sizeof($places)) {
+        if (0 === count($places)) {
             return new Message($userId, 'Sorry, we don\'t have any church next to your geolocation.');
         }
 

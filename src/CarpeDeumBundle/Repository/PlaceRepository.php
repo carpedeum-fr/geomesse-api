@@ -24,6 +24,7 @@ class PlaceRepository extends EntityRepository
      * @param $lng
      * @param $lat
      * @param float $distance
+     *
      * @return QueryBuilder
      */
     public function getNear($lng, $lat, $distance = .1)
@@ -38,7 +39,7 @@ class PlaceRepository extends EntityRepository
                         'coordinates' => [(float) $lng, (float) $lat],
                     ]),
                     'distance' => $distance,
-                ]
+                ],
             ]
         );
 
