@@ -6,6 +6,36 @@ place_index:
             template: 'CarpeDeumBundle:Place:index.html.twig'
             paginate: 50
 
+place_near_search:
+    path: /near/{lat}/{lng}
+    requirements:
+        lat: \d+\.\d+
+        lng: \d+\.\d+
+    defaults:
+        _controller: cd.controller.place:indexAction
+        _sylius:
+            template: 'CarpeDeumBundle:Place:index.html.twig'
+            repository:
+                method: getPaginatorNear
+                arguments: [$lng, $lat]
+            paginate: 50
+
+place_bound_search:
+    path: /bound/{lat1}/{lng1}/{lat2}/{lng2}
+    requirements:
+        lat1: \d+\.\d+
+        lng1: \d+\.\d+
+        lat2: \d+\.\d+
+        lng2: \d+\.\d+
+    defaults:
+        _controller: cd.controller.place:indexAction
+        _sylius:
+            template: 'CarpeDeumBundle:Place:index.html.twig'
+            repository:
+                method: getBound
+                arguments: [$lat1, $lng1, $lat2, $lng2]
+            paginate: 50
+
 place_show:
     path: /{id}
     defaults:

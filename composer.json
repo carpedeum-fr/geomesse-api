@@ -32,7 +32,12 @@
         "sensio/framework-extra-bundle":        "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
 
-        "sylius/resource-bundle":               "@beta"
+        "guzzlehttp/guzzle":                    "~6.0",
+        "nelmio/api-doc-bundle":                "^2.13",
+        "sylius/resource-bundle":               "@beta",
+        "friendsofsymfony/oauth-server-bundle": "^1.5",
+        "friendsofsymfony/user-bundle":         "@beta",
+        "pimax/fb-messenger-php":               "@dev"
     },
     "require-dev": {
         "sensio/generator-bundle":                "^3.0",

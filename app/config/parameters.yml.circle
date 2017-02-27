@@ -11,3 +11,4 @@ parameters:
     mailer_password:   ~
 
     secret:            ThisTokenIsNotSoSecretChangeIt
+    messenger_access_token: token

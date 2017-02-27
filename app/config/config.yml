@@ -29,6 +29,7 @@ framework:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         handler_id:  session.handler.native_file
         save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+        name: GEOMESSE
     fragments:       ~
     http_method_override: true
     assets: ~
@@ -63,6 +64,14 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        dql:
+            string_functions:
+                contains: CarpeDeumBundle\Doctrine\Functions\Contains
+                distance: CarpeDeumBundle\Doctrine\Functions\Distance
+                equals:   CarpeDeumBundle\Doctrine\Functions\Equals
+                area: CarpeDeumBundle\Doctrine\Functions\Area
+                geomfromtext: CarpeDeumBundle\Doctrine\Functions\GeomFromText
+                geomfromjson: CarpeDeumBundle\Doctrine\Functions\GeomFromJson
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -80,13 +89,33 @@ fos_rest:
     routing_loader:
         default_format: json
 
+nelmio_api_doc:
+    cache:
+        enabled: true
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: CarpeDeumBundle\Entity\User
+
+fos_oauth_server:
+    db_driver: orm
+    client_class:        CarpeDeumBundle\Entity\Client
+    access_token_class:  CarpeDeumBundle\Entity\AccessToken
+    refresh_token_class: CarpeDeumBundle\Entity\RefreshToken
+    auth_code_class:     CarpeDeumBundle\Entity\AuthCode
+    service:
+        user_provider: fos_user.user_provider.username
+
 sylius_resource:
     resources:
         cd.place:
             driver: doctrine/orm
             classes:
                 model: CarpeDeumBundle\Entity\Place
+                repository: CarpeDeumBundle\Repository\PlaceRepository
         cd.time:
             driver: doctrine/orm
             classes:
                 model: CarpeDeumBundle\Entity\Time
+                repository: CarpeDeumBundle\Repository\TimeRepository
