@@ -79,12 +79,20 @@ class MessengerBotController extends Controller
     {
         $data = explode(':', $postback);
         $place = $this->get('cd.repository.place')->find($data[1]);
-        $timetable = $this->get('cd.repository.time')->getTime($place, $data[0]);
+        $timetable = $this->get('cd.repository.time')->getTimes($place, $data[0]);
 
         $horaires = '';
+        $currentDay = '';
         /** @var Time $time */
         foreach ($timetable as $time) {
-            $horaires .= chr(10).'- '.Time::DAYS_OF_WEEK[$time->getDayOfWeek()].' '.$time->getTime()->format('H:i').' ('.$time->getNotes().')';
+            if ($currentDay !== $time->getDayOfWeek()) {
+                $horaires .= chr(10).'- '.Time::DAYS_OF_WEEK[$time->getDayOfWeek()].' : ';
+            }
+            $horaires .= $time->getTime()->format('H:i').' ';
+            if ('' !== $time->getNotes()) {
+                $horaires .= '('.$time->getNotes().') ';
+            }
+            $currentDay = $time->getDayOfWeek();
         }
 
         return new Message($userId, 'Voilà les prochains horaires à '.$place->getName().' : '.$horaires);
