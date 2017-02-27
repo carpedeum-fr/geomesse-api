@@ -20,6 +20,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MessengerBotController extends Controller
 {
+    const APPLICATION_DOMAIN = 'https://api.geomesse.com';
+
     /**
      * @Route("/messenger-webhook", name="messenger_webhook_test")
      * @Method("GET")
@@ -108,7 +110,7 @@ class MessengerBotController extends Controller
                     new MessageButton(MessageButton::TYPE_POSTBACK, 'Semaine', 'weekday:'.$currentPlace->getId()),
                     new MessageButton(MessageButton::TYPE_POSTBACK, 'Dimanche', 'sunday:'.$currentPlace->getId()),
                 ],
-                'https://geomesse.ghirardotti.fr'.$this->generateUrl('place_show', ['id' => $currentPlace->getId()])
+                'https://api.geomesse.com'.$this->generateUrl('place_show', ['id' => $currentPlace->getId()])
             );
         }
 
@@ -126,7 +128,7 @@ class MessengerBotController extends Controller
         $accessToken = $this->getParameter('messenger_access_token');
         $response = [
             'setting_type'        => 'domain_whitelisting',
-            'whitelisted_domains' => ['https://geomesse.ghirardotti.fr'],
+            'whitelisted_domains' => ['https://api.geomesse.com'],
             'domain_action_type'  => 'add',
         ];
 
