@@ -2,6 +2,7 @@
 
 namespace CarpeDeumBundle\Repository;
 
+use CarpeDeumBundle\Entity\Place;
 use Doctrine\ORM\QueryBuilder;
 
 class TimeRepository extends EntityRepository
@@ -15,7 +16,7 @@ class TimeRepository extends EntityRepository
             'typeOfDay' => $typeOfDay,
         ]);
 
-        return $qb;
+        return $qb->getQuery()->getResult();
     }
 
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
@@ -40,6 +41,9 @@ class TimeRepository extends EntityRepository
 
             unset($criteria['typeOfDay']);
         }
+
+        $queryBuilder->addOrderBy('t.dayOfWeek');
+        $queryBuilder->addOrderBy('t.time');
 
         parent::applyCriteria($queryBuilder, $criteria);
     }
