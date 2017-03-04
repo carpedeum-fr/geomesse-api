@@ -4,13 +4,15 @@
   "homepage": "https://github.com/carpedeum-fr/carpedeum",
   "dependencies": {
     "font-awesome": "4.5.*",
+    "select2": "*",
+    "skeleton-css": "^2.0.4"
+  },
+  "devDependencies": {
     "gulp-clean-css": "^2.3.0",
     "gulp-concat": "^2.6.1",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.9.1",
-    "gulp-uglify": "^2.0.0",
-    "select2": "*",
-    "skeleton-css": "^2.0.4"
+    "gulp-uglify": "^2.0.0"
   },
   "license": "MIT",
   "private": true,
