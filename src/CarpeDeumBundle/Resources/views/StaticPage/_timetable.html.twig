@@ -1,0 +1,10 @@
+<ul>
+    {% for i in start..end %}
+        <li>
+            {{- constant('CarpeDeumBundle\\Entity\\Time::DAYS_OF_WEEK')[i] }} :&nbsp;
+            {%- for time in place.timetable if time.dayOfWeek == i %}
+                {{- time.time|date('H:i') }}
+            {% endfor -%}
+        </li>
+    {% endfor %}
+</ul>
