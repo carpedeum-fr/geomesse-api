@@ -4,6 +4,47 @@
 
 {% block body %}
     <div class="row">
-
+        {{ form_start(searchForm) }}
+        <div class="two columns">&nbsp;</div>
+        <div class="two columns">
+            {{ form_label(searchForm.location) }}
+        </div>
+        <div class="four columns">
+            {{ form_widget(searchForm.location) }}
+        </div>
+        <div class="two columns">
+            {{ form_widget(searchForm.submit) }}
+        </div>
+        {{ form_end(searchForm) }}
     </div>
+    {% if places is not empty %}
+        <div class="row">
+            <div class="three columns">Name</div>
+            <div class="three columns">Address</div>
+            <div class="three columns"></div>
+            <div class="three columns"></div>
+        </div>
+        {% for place in places %}
+            <div class="row">
+                <div class="three columns"><a href="{{ path('place_show', {id: place.id}) }}">{{ place.name }}</a> {% if place.url %}(<a href="{{ place.url }}">site web</a>){% endif %}<br>{{ place.address1 }}<br>{{ place.zipCode }} {{ place.city }}</div>
+                <div class="three columns"><img src="https://api.mapbox.com/v4/mapbox.streets/pin-m-religious-christian+000({{ place.longitude }},{{ place.latitude }})/{{ place.longitude }},{{ place.latitude }},16/190x190.jpg70?access_token=pk.eyJ1IjoibGF1cmVudGdoIiwiYSI6IjdveXNkOEUifQ.F7qS-bIlU5-e23HB-SBDpA"></div>
+                <div class="three columns">{% include '_timetable.html.twig' with {start:1, end:4} %}</div>
+                <div class="three columns">{% include '_timetable.html.twig' with {start:5, end:7} %}</div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var placeSearch, autocomplete;
+
+        function initAutocomplete() {
+            // Create the autocomplete object, restricting the search to geographical location types.
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById('search_location')), {types: ['geocode']});
+
+            // When the user selects an address from the dropdown, populate the address fields in the form.
+            autocomplete.addListener('place_changed', fillInAddress);
+        }
+    </script>
 {% endblock %}

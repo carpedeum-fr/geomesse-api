@@ -4,19 +4,22 @@
 
 {% block body %}
     <div class="row">
-        <div class="one-half column">
+        <div class="four columns">
             <h1>{{ place.name }}</h1>
             <ul>
                 <li>{{ place.address }}</li>
                 <li>{{ place.telephone }}</li>
-                <li>{{ place.url }}</li>
+                <li><a href="{{ place.url }}">{{ place.url }}</a></li>
             </ul>
             <p>Histoire : {{ place.history }}</p>
             <p>Notes : {{ place.notes }}</p>
             <p>Messes : {{ place.eucharist }}</p>
         </div>
-        <div class="one-half column">
-            <img src="//mediaauto.carpedeum.fr/300x300{{ place.pic }}">
+        <div class="four columns">
+            <img width="264" height="264" src="//mediaauto.carpedeum.fr/300x300{{ place.pic }}">
+        </div>
+        <div class="four columns">
+            <img src="https://api.mapbox.com/v4/mapbox.streets/pin-m-religious-christian+000({{ place.longitude }},{{ place.latitude }})/{{ place.longitude }},{{ place.latitude }},16/264x264.jpg70?access_token=pk.eyJ1IjoibGF1cmVudGdoIiwiYSI6IjdveXNkOEUifQ.F7qS-bIlU5-e23HB-SBDpA">
         </div>
     </div>
     <div class="row">

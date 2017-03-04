@@ -1,0 +1,5 @@
+services:
+    cd.form.search:
+        class: CarpeDeumBundle\Form\SearchType
+        tags:
+            - { name: form.type, alias: search_form }

@@ -49,7 +49,7 @@ class MessengerBotController extends Controller
 
         foreach ($data['entry'][0]['messaging'] as $message) {
             // Skipping delivery messages
-            if (!empty($message['delivery'])) {
+            if (!empty($message['delivery'])||!empty($message['read'])) {
                 continue;
             }
 
@@ -58,21 +58,40 @@ class MessengerBotController extends Controller
 
             if (array_key_exists('message', $message)) {
                 if (array_key_exists('text', $message['message'])) {
-                    $response = new QuickReply($userId, 'Salut ! Partage ta géolocalisation et je te trouve une messe.', [
-                        ['content_type' => 'location'],
-                    ]);
+                    $response = $this->textReply($message['message']['text'], $userId);
                 } elseif (array_key_exists('attachments', $message['message'])) {
                     $coordinates = $message['message']['attachments'][0]['payload']['coordinates'];
                     $response = $this->coordinatesReply($coordinates, $userId);
                 }
             } elseif (array_key_exists('postback', $message)) {
                 $response = $this->postbackReply($message['postback']['payload'], $userId);
+            } else {
+                continue;
             }
 
             $bot->send($response);
         }
 
         return new Response();
+    }
+
+    protected function textReply($text, $userId)
+    {
+        if (preg_match('/^[0-9]{5}$/', $text)) {
+            $places = $this->get('cd.repository.place')->findBy(['zipCode' => $text], [], 3);
+            return $this->sendPlaceList($places, $userId);
+        }
+
+        /** @var Place $place */
+        $place = $this->get('cd.repository.place')->find(rand(1,6000));
+        return new QuickReply($userId, 'Salut ! Pour trouver une messe, envoie moi tes coordonnées GPS, ou donne moi un code postal.', [
+            ['content_type' => 'location'],
+            [
+                'content_type' => 'text',
+                'title'        => $place->getZipCode(),
+                'payload'      => $place->getZipCode(),
+            ],
+        ]);
     }
 
     protected function postbackReply($postback, $userId)
@@ -102,8 +121,13 @@ class MessengerBotController extends Controller
     {
         $places = $this->get('cd.repository.place')->getResultsNear($coordinates['long'], $coordinates['lat'], 0.1, 3);
 
+        return $this->sendPlaceList($places, $userId);
+    }
+
+    protected function sendPlaceList($places, $userId)
+    {
         if (0 === count($places)) {
-            return new Message($userId, 'Sorry, we don\'t have any church next to your geolocation.');
+            return new Message($userId, 'Sorry, we don\'t have any church here.');
         }
 
         $elements = [];
