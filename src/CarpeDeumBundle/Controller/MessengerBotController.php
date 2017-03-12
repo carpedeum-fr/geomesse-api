@@ -54,7 +54,7 @@ class MessengerBotController extends Controller
             }
 
             $userId = $message['sender']['id'];
-            $response = new Message($userId, 'Je ne comprends pas.');
+            $response = new Message($userId, 'Je ne comprends pas ! ¯\_(ツ)_/¯');
 
             if (array_key_exists('message', $message)) {
                 if (array_key_exists('text', $message['message'])) {
@@ -127,7 +127,7 @@ class MessengerBotController extends Controller
     protected function sendPlaceList($places, $userId)
     {
         if (0 === count($places)) {
-            return new Message($userId, 'Sorry, we don\'t have any church here.');
+            return new Message($userId, 'Désolé, je n\'ai pas d\'adresses à proximité.');
         }
 
         $elements = [];
