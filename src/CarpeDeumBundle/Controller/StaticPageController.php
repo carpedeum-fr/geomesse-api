@@ -32,6 +32,15 @@ class StaticPageController extends Controller
     }
 
     /**
+     * @Route("/pwa", name="pwa")
+     * @Template()
+     */
+    public function pwaAction()
+    {
+        return [];
+    }
+
+    /**
      * @Route("/privacy-policy", name="privacy")
      * @Template()
      */
