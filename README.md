@@ -1,7 +1,7 @@
 carpedeum
 =========
 
-[![CircleCI](https://circleci.com/gh/carpedeum-fr/carpedeum/tree/master.svg?style=svg)](https://circleci.com/gh/carpedeum-fr/carpedeum/tree/master)
+[![CircleCI](https://circleci.com/gh/carpedeum-fr/geomesse-api/tree/master.svg?style=svg)](https://circleci.com/gh/carpedeum-fr/geomesse-api/tree/master)
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/80e5ae43-8a1c-40da-896b-183f398227b3/big.png)](https://insight.sensiolabs.com/projects/80e5ae43-8a1c-40da-896b-183f398227b3)
 
