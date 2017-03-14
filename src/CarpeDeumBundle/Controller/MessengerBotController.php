@@ -49,7 +49,7 @@ class MessengerBotController extends Controller
 
         foreach ($data['entry'][0]['messaging'] as $message) {
             // Skipping delivery messages
-            if (!empty($message['delivery'])||!empty($message['read'])) {
+            if (!empty($message['delivery']) || !empty($message['read'])) {
                 continue;
             }
 
@@ -79,11 +79,13 @@ class MessengerBotController extends Controller
     {
         if (preg_match('/^[0-9]{5}$/', $text)) {
             $places = $this->get('cd.repository.place')->findBy(['zipCode' => $text], [], 3);
+
             return $this->sendPlaceList($places, $userId);
         }
 
         /** @var Place $place */
-        $place = $this->get('cd.repository.place')->find(rand(1,6000));
+        $place = $this->get('cd.repository.place')->find(rand(1, 6000));
+
         return new QuickReply($userId, 'Salut ! Pour trouver une messe, envoie moi tes coordonnées GPS, ou donne moi un code postal.', [
             ['content_type' => 'location'],
             [
