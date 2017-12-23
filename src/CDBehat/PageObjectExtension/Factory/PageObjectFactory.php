@@ -89,7 +89,7 @@ final class PageObjectFactory implements Factory
     /**
      * {@inheritdoc}
      */
-    public function createInlineElement($selector)
+    public function createInlineElement($selector, $name = NULL)
     {
         return $this->decoratedFactory->createInlineElement($selector);
     }
