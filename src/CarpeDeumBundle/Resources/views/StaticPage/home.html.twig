@@ -28,8 +28,8 @@
             <div class="row">
                 <div class="three columns"><a href="{{ path('place_show', {id: place.id}) }}">{{ place.name }}</a> {% if place.url %}(<a href="{{ place.url }}">site web</a>){% endif %}<br>{{ place.address1 }}<br>{{ place.zipCode }} {{ place.city }}</div>
                 <div class="three columns"><img src="https://api.mapbox.com/v4/mapbox.streets/pin-m-religious-christian+000({{ place.longitude }},{{ place.latitude }})/{{ place.longitude }},{{ place.latitude }},16/190x190.jpg70?access_token=pk.eyJ1IjoibGF1cmVudGdoIiwiYSI6IjdveXNkOEUifQ.F7qS-bIlU5-e23HB-SBDpA"></div>
-                <div class="three columns">{% include '_timetable.html.twig' with {start:1, end:4} %}</div>
-                <div class="three columns">{% include '_timetable.html.twig' with {start:5, end:7} %}</div>
+                <div class="three columns">{% include '@CarpeDeum/StaticPage/_timetable.html.twig' with {start:1, end:4} %}</div>
+                <div class="three columns">{% include '@CarpeDeum/StaticPage/_timetable.html.twig' with {start:5, end:7} %}</div>
             </div>
         {% endfor %}
     {% endif %}
