@@ -12,3 +12,4 @@ parameters:
 
     secret:            ThisTokenIsNotSoSecretChangeIt
     messenger_access_token: token
+    recast_token:      token
