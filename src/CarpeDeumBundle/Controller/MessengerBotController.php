@@ -53,14 +53,6 @@ class MessengerBotController extends Controller
                 continue;
             }
 
-            $client = new Client(['base_uri' => 'https://api.recast.ai/']);
-            $client->post('v2/request',
-                ['json' => ['text' => 'MESSAGE', 'language' => 'fr']],
-                ['headers' => [
-                        'Authorization' => 'Token '.$this->getParameter('recast_token'),
-                    ],
-                ]);
-
             $userId = $message['sender']['id'];
             $response = new Message($userId, 'Je ne comprends pas.');
 
@@ -148,7 +140,7 @@ class MessengerBotController extends Controller
     protected function sendPlaceList($places, $userId)
     {
         if (0 === count($places)) {
-            return new Message($userId, 'Sorry, we don\'t have any church here.');
+            return new Message($userId, 'Désolé, je manque d\'information ici.');
         }
 
         $elements = [];

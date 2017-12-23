@@ -94,6 +94,9 @@ nelmio_api_doc:
         enabled: true
 
 fos_user:
+    from_email:
+        address:        contact@geomesse.com
+        sender_name:    GeoMesse
     db_driver: orm
     firewall_name: main
     user_class: CarpeDeumBundle\Entity\User
