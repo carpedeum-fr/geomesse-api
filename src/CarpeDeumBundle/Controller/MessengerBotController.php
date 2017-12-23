@@ -91,6 +91,16 @@ class MessengerBotController extends Controller
             return $this->sendPlaceList($places, $userId);
         }
 
+        // Send text message to Recast AI
+        try {
+            $client = new Client(['base_uri' => 'https://api.recast.ai/']);
+            $client->post('v2/request',
+                [
+                    'json' => ['text' => $text, 'language' => 'fr'],
+                    'headers' => ['Authorization' => "Token ".$this->getParameter('recast_token')]
+                ]);
+        } catch (\Exception $e) {}
+
         /** @var Place $place */
         $place = $this->get('cd.repository.place')->find(rand(1, 6000));
 
