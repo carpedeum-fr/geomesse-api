@@ -2,7 +2,7 @@ machine:
   timezone:
     Europe/Paris
   php:
-    version: 7.1.9
+    version: 7.0.11
   environment:
     DB_NAME: "carpedeum_test"
 
