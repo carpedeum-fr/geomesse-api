@@ -53,6 +53,15 @@ class MessengerBotController extends Controller
                 continue;
             }
 
+            $client = new Client(['base_uri' => 'https://api.recast.ai/']);
+            $client->post('v2/request',
+                ['json' => ['text' => 'MESSAGE', 'language' => 'fr']],
+                ['headers' =>
+                    [
+                        'Authorization' => "Token ".$this->getParameter('recast_token')
+                    ]
+                ]);
+
             $userId = $message['sender']['id'];
             $response = new Message($userId, 'Je ne comprends pas.');
 
