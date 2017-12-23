@@ -140,7 +140,7 @@ class MessengerBotController extends Controller
     protected function sendPlaceList($places, $userId)
     {
         if (0 === count($places)) {
-            return new Message($userId, 'Sorry, we don\'t have any church here.');
+            return new Message($userId, 'Désolé, je manque d\'information ici.');
         }
 
         $elements = [];
