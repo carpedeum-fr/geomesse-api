@@ -9,7 +9,7 @@ interface GeolocalizableInterface
      *
      * @return float
      */
-    public function calculateDistance(GeolocalizableInterface $geolocalizable);
+    public function calculateDistance(self $geolocalizable);
 
     /**
      * @return array

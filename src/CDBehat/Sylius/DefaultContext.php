@@ -508,7 +508,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function waitFor(callable $callback, $limit = 30, $delay = 100)
     {
-        for ($i = 0; $i < $limit; ++$i) {
+        for ($i = 0; $i < $limit; $i++) {
             $payload = $callback();
 
             if (!empty($payload)) {
