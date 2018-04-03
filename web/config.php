@@ -11,7 +11,7 @@
  */
 
 if (!isset($_SERVER['HTTP_HOST'])) {
-    exit("This script cannot be run from the CLI. Run it from a browser.\n");
+    exit('This script cannot be run from the CLI. Run it from a browser.');
 }
 
 if (!in_array(@$_SERVER['REMOTE_ADDR'], [
