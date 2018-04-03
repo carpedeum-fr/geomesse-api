@@ -101,8 +101,8 @@ class MessengerBotController extends Controller
             ['content_type' => 'location'],
             [
                 'content_type' => 'text',
-                'title'        => $place->getZipCode(),
-                'payload'      => $place->getZipCode(),
+                'title'        => $place ? $place->getZipCode() : '',
+                'payload'      => $place ? $place->getZipCode() : '',
             ],
         ]);
     }
