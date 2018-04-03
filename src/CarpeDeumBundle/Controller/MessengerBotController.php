@@ -61,6 +61,7 @@ class MessengerBotController extends Controller
                     $response = $this->textReply($message['message']['text'], $userId);
                 } elseif (array_key_exists('attachments', $message['message'])) {
                     $coordinates = $message['message']['attachments'][0]['payload']['coordinates'];
+                    $bot->send(new Message($userId, 'Coordonnées reçues, je regarde ce que j\'ai...'));
                     $response = $this->coordinatesReply($coordinates, $userId);
                 }
             } elseif (array_key_exists('postback', $message)) {
@@ -101,8 +102,8 @@ class MessengerBotController extends Controller
             ['content_type' => 'location'],
             [
                 'content_type' => 'text',
-                'title'        => $place->getZipCode(),
-                'payload'      => $place->getZipCode(),
+                'title'        => $place ? $place->getZipCode() : '',
+                'payload'      => $place ? $place->getZipCode() : '',
             ],
         ]);
     }
