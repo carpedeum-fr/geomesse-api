@@ -28,11 +28,14 @@ class EntityRepository extends BaseEntityRepository
     }
 
     /**
-     * @param int $id
+     * @param mixed $id
+     * @param null $lockMode
+     * @param null $lockVersion
      *
-     * @return null|object
+     * @return mixed|null|object
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function find($id)
+    public function find($id, $lockMode = null, $lockVersion = null)
     {
         return $this
             ->getQueryBuilder()
@@ -54,10 +57,11 @@ class EntityRepository extends BaseEntityRepository
 
     /**
      * @param array $criteria
-     *
-     * @return null|object
+     * @param array|null $orderBy
+     * @return mixed|null|object
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function findOneBy(array $criteria)
+    public function findOneBy(array $criteria, array $orderBy = null)
     {
         $queryBuilder = $this->getQueryBuilder();
 
@@ -113,13 +117,10 @@ class EntityRepository extends BaseEntityRepository
     }
 
     /**
-     * Overridden just because original implementation hardcode 'o' as alias.
-     *
      * @param string $name
-     *
      * @return string
      */
-    protected function getPropertyName($name)
+    protected function getPropertyName(string $name): string
     {
         if (false === strpos($name, '.')) {
             return $this->getAlias().'.'.$name;
