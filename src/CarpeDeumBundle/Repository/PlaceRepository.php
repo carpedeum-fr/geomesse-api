@@ -65,7 +65,12 @@ class PlaceRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function createPaginator(array $criteria = [], array $sorting = [])
+    /**
+     * @param array $criteria
+     * @param array $sorting
+     * @return iterable
+     */
+    public function createPaginator(array $criteria = [], array $sorting = []): iterable
     {
         $queryBuilder = $this->createQueryBuilder('p');
 
@@ -75,7 +80,11 @@ class PlaceRepository extends EntityRepository
         return $this->getPaginator($queryBuilder);
     }
 
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
+    /**
+     * @param QueryBuilder $queryBuilder
+     * @param array $criteria
+     */
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
         if (isset($criteria['inside_json'])) {
             $queryBuilder
