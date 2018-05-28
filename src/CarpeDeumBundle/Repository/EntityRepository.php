@@ -13,11 +13,11 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository as BaseEntityRepo
 class EntityRepository extends BaseEntityRepository
 {
     /**
-     * Overridden just because original implementation hardcode 'o' as the alias.
-     *
-     * {@inheritdoc}
+     * @param array $criteria
+     * @param array $sorting
+     * @return iterable
      */
-    public function createPaginator(array $criteria = [], array $sorting = [])
+    public function createPaginator(array $criteria = [], array $sorting = []): iterable
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
@@ -45,7 +45,7 @@ class EntityRepository extends BaseEntityRepository
     }
 
     /**
-     * @return array
+     * @return array|mixed
      */
     public function findAll()
     {
@@ -74,18 +74,17 @@ class EntityRepository extends BaseEntityRepository
 
     /**
      * @param array $criteria
-     * @param array $sorting
-     * @param int   $limit
-     * @param int   $offset
-     *
-     * @return array
+     * @param array|null $orderBy
+     * @param null $limit
+     * @param null $offset
+     * @return array|mixed
      */
-    public function findBy(array $criteria, array $sorting = [], $limit = null, $offset = null)
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
         $this->applyCriteria($queryBuilder, $criteria);
-        $this->applySorting($queryBuilder, $sorting);
+        $this->applySorting($queryBuilder, $orderBy);
 
         if (null !== $limit) {
             $queryBuilder->setMaxResults($limit);
