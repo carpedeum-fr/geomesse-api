@@ -29,11 +29,12 @@ class EntityRepository extends BaseEntityRepository
 
     /**
      * @param mixed $id
-     * @param null $lockMode
-     * @param null $lockVersion
+     * @param null  $lockMode
+     * @param null  $lockVersion
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
      *
      * @return mixed|null|object
-     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
@@ -56,10 +57,12 @@ class EntityRepository extends BaseEntityRepository
     }
 
     /**
-     * @param array $criteria
+     * @param array      $criteria
      * @param array|null $orderBy
-     * @return mixed|null|object
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed|null|object
      */
     public function findOneBy(array $criteria, array $orderBy = null)
     {
@@ -118,6 +121,7 @@ class EntityRepository extends BaseEntityRepository
 
     /**
      * @param string $name
+     *
      * @return string
      */
     protected function getPropertyName(string $name): string
