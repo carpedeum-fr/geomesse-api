@@ -15,6 +15,7 @@ class EntityRepository extends BaseEntityRepository
     /**
      * @param array $criteria
      * @param array $sorting
+     *
      * @return iterable
      */
     public function createPaginator(array $criteria = [], array $sorting = []): iterable
@@ -76,10 +77,11 @@ class EntityRepository extends BaseEntityRepository
     }
 
     /**
-     * @param array $criteria
+     * @param array      $criteria
      * @param array|null $orderBy
-     * @param null $limit
-     * @param null $offset
+     * @param null       $limit
+     * @param null       $offset
+     *
      * @return array|mixed
      */
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
