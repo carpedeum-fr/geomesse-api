@@ -19,7 +19,11 @@ class TimeRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
+    /**
+     * @param QueryBuilder $queryBuilder
+     * @param array $criteria
+     */
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
         if (isset($criteria['place'])) {
             $queryBuilder
