@@ -68,6 +68,7 @@ class PlaceRepository extends EntityRepository
     /**
      * @param array $criteria
      * @param array $sorting
+     *
      * @return iterable
      */
     public function createPaginator(array $criteria = [], array $sorting = []): iterable
@@ -82,7 +83,7 @@ class PlaceRepository extends EntityRepository
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param array $criteria
+     * @param array        $criteria
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {

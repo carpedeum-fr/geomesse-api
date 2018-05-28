@@ -21,7 +21,7 @@ class TimeRepository extends EntityRepository
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param array $criteria
+     * @param array        $criteria
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
